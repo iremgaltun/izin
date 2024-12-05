@@ -1,0 +1,28 @@
+/* Dialog'un genişliğini artırma */
+.custom-dialog {
+    width: 60% !important; /* Genişliği ayarlıyoruz, !important ile önceliği arttırıyoruz */
+    padding: 20px;
+    margin: 0 auto; /* Ortalanmış görünüm */
+}
+
+/* Başlık kısmı için stil */
+.dialog-title {
+    display: flex;
+    justify-content: center; /* Yatay ortalama */
+    align-items: center;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Form alanları için stil */
+.custom-dialog input, .custom-dialog .vaadin-date-picker {
+    width: 100% !important; /* Tüm form alanlarını genişletiyoruz */
+    margin-bottom: 10px;
+}
+.custom-search-field {
+    width: 100% ; /* Burada istediğiniz genişliği belirleyebilirsiniz */
+    max-width: none; /* Maksimum genişlik sınırlaması */
+}
+
