@@ -13,7 +13,6 @@ public class Employee {
     private long id;
 
     @NotBlank(message = "Name cannot be blank")
-
     private String name;
 
     @NotBlank(message = "Lastname cannot be blank")
@@ -27,7 +26,6 @@ public class Employee {
     private LocalDate birthDate;
 
     @NotNull(message = "Date of employment cannot be null")
-
     private LocalDate dateOfEmployment;
 
     @NotNull(message = "Phone number cannot be null")
