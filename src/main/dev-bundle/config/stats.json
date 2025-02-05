@@ -75,6 +75,7 @@
   "date-fns": "2.29.3",
   "lit": "2.7.4",
   "mobile-drag-drop": "2.3.0-rc.2",
+  "no-name": "file:",
   "proj4": "2.9.0"
  },
  "npmModules": {
@@ -269,7 +270,7 @@
   "Frontend/styles/GeneratedStyle.css"
  ],
  "frontendHashes": {
-  "styles/GeneratedStyle.css": "3b8ff5b32cb48e7ad7feaa2c8fdda334907e3f99f0bd2212bdfa1f47ee4d5442",
+  "styles/GeneratedStyle.css": "ca7bad3b6a5497ddb69f3cfc769eb02401b38a4238905aec810eee2443e5dab9",
   "buttonFunctions.js": "c852123f9b2c44eb75e555119d3e05a7dbe78b91d0ab616feb9df1654474707d",
   "comboBoxConnector.js": "1d004c3dae9c76f8bcc68678abe1b8f7bdc8b456f5c9c4c7f190df8ed25d66cd",
   "contextMenuConnector.js": "25a200f8086461635ddd92316ebeb5a868294c8650a190efbae120edb1088f4f",
@@ -294,7 +295,7 @@
  },
  "themeJsonContents": {},
  "entryScripts": [
-  "VAADIN/build/indexhtml-66dc1102.js"
+  "VAADIN/build/indexhtml-3b5c190d.js"
  ],
  "webComponents": [],
  "cvdlModules": {
@@ -327,8 +328,8 @@
    "version": "24.1.0"
   }
  },
- "packageJsonHash": "2e5b002dfea194d0021170f05797ae72085b5094e257f33185f59fcaa2febf4a",
+ "packageJsonHash": "49d97c8aaa5e64e4bc03f2b08daf839db6757e00782118ab222a77f7ac2fcb22",
  "indexHtmlGenerated": [
-  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-66dc1102.js\"></script>"
+  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-3b5c190d.js\"></script>"
  ]
 }

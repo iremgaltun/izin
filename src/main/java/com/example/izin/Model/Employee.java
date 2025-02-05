@@ -3,7 +3,9 @@ package com.example.izin.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import java.util.List;
 import java.time.LocalDate;
+
 @Data
 @Entity
 @Table(name = "employees")
@@ -32,6 +34,12 @@ public class Employee {
     @Column(name = "phone_number", nullable = false, length = 15)
     private String phoneNumber;
 
-    @Column(name  = "Status")
-    private String status ;
+    @Column(name = "position")
+    private String position;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Leave> leaves;
+
+
 }
+

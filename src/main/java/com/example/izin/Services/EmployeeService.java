@@ -1,14 +1,20 @@
 package com.example.izin.Services;
 
+import com.example.izin.Model.EmpLeaveDTO;
 import com.example.izin.Model.Employee;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EmployeeService {
 
+
+    public List<EmpLeaveDTO> getAllEmployeeLeaveDetails();
+
     // Çalışanı kaydet (ekle veya güncelle)
-    void save(Employee employee);
+    Employee save(Employee employee);
 
     // Tüm çalışanları getir
     List<Employee> findAll();
@@ -24,4 +30,6 @@ public interface EmployeeService {
 
     // Çalışan sil
     void delete(Employee employee);
+
+    boolean isEmployeeOnLeave(Long id);
 }

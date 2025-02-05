@@ -26,3 +26,115 @@
     max-width: none; /* Maksimum genişlik sınırlaması */
 }
 
+
+vaadin-date-picker::part(input-field) {
+    font-size: var(--lumo-font-size-s);
+    text-align: right;
+}
+
+vaadin-date-picker[theme~="helper-above-field"]::part(helper-text) {
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+}
+.employee-details-view {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.employee-info-container, .leave-grid-container {
+    width: 100%;
+    max-width: 1200px; /* Genişlik sınırı isteğe göre ayarlanabilir */
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+.employee-info-layout {
+    display: flex;
+    align-items: center;
+    border-radius: 3%;
+}
+
+.employee-photo {
+    margin-left:8px ;
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    margin-right: 16px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.employee-info-details {
+    flex-grow: 1;
+}
+
+.leave-grid {
+    width: 100%;
+    margin-top: 16px;
+}
+/* Ad Soyadı ortada */
+.name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2E3B55;
+    margin-bottom: 16px;
+    text-align: center;
+    position: relative;
+    margin-left: 3px;
+    margin-top: 5px;
+}
+
+/* TCKN, doğum tarihi, telefon bilgileri vs. için */
+.employee-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 sütunlu düzen */
+    gap: 12px; /* Öğeler arası boşluk */
+    justify-items: start;
+    align-items: center;
+    margin-left:10px ;
+}
+
+/* Daha fazla görsel düzen için bu eklenebilir */
+.tckn,
+.birthDate,
+.phone,
+.status,
+.employmentDate {
+    font-size: 16px;
+    color: #555;
+}
+.employee-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* İki sütun oluşturur */
+    row-gap: 15px;
+    justify-items: start;
+    align-items: center;
+    column-gap: 50px;
+}
+.edit-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    z-index: 1;
+}
+.icon-container {
+    position: relative;
+    width: 20px;
+    margin-bottom: 200px;
+}
+.custom-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 8px;
+    margin-right: 16px;
+}
+.header{
+    margin: 0;
+    font-size: 1.5em;
+}

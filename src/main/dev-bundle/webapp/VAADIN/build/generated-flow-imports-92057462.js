@@ -1,4 +1,4 @@
-import{C as CSSResult,c as css$e,u as unsafeCSS,D as Directive,n as nothing,P as PartType,a as noChange,d as directive,r as render$1,s as svg$6,h as html$1,_ as __vitePreload,L as LitElement}from"./indexhtml-66dc1102.js";const{toString:toString$2}=Object.prototype;function isRegexp(n){return toString$2.call(n)==="[object RegExp]"}function stripCssComments(n,{preserve:i=!0,whitespace:t=!0,all:r}={}){if(r)throw new Error("The `all` option is no longer supported. Use the `preserve` option instead.");let o=i,a;typeof i=="function"?(o=!1,a=i):isRegexp(i)&&(o=!1,a=d=>i.test(d));let s=!1,l="",h="",c="";for(let d=0;d<n.length;d++){if(l=n[d],n[d-1]!=="\\"&&(l==='"'||l==="'")&&(s===l?s=!1:s||(s=l)),!s&&l==="/"&&n[d+1]==="*"){const u=n[d+2]==="!";let p=d+2;for(;p<n.length;p++){if(n[p]==="*"&&n[p+1]==="/"){o&&u||a&&a(h)?c+=`/*${h}*/`:t||(n[p+2]===`
+import{C as CSSResult,c as css$e,u as unsafeCSS,D as Directive,n as nothing,P as PartType,a as noChange,d as directive,r as render$1,s as svg$6,h as html$1,_ as __vitePreload,L as LitElement}from"./indexhtml-3b5c190d.js";const{toString:toString$2}=Object.prototype;function isRegexp(n){return toString$2.call(n)==="[object RegExp]"}function stripCssComments(n,{preserve:i=!0,whitespace:t=!0,all:r}={}){if(r)throw new Error("The `all` option is no longer supported. Use the `preserve` option instead.");let o=i,a;typeof i=="function"?(o=!1,a=i):isRegexp(i)&&(o=!1,a=d=>i.test(d));let s=!1,l="",h="",c="";for(let d=0;d<n.length;d++){if(l=n[d],n[d-1]!=="\\"&&(l==='"'||l==="'")&&(s===l?s=!1:s||(s=l)),!s&&l==="/"&&n[d+1]==="*"){const u=n[d+2]==="!";let p=d+2;for(;p<n.length;p++){if(n[p]==="*"&&n[p+1]==="/"){o&&u||a&&a(h)?c+=`/*${h}*/`:t||(n[p+2]===`
 `?p++:n[p+2]+n[p+3]===`\r
 `&&(p+=2)),h="";break}h+=n[p]}d=p+1;continue}c+=l}return c}const polyfilledSafari=CSSStyleSheet.toString().includes("document.createElement"),createLinkReferences=(n,i)=>{const t=/(?:@media\s(.+?))?(?:\s{)?\@import\s*(?:url\(\s*['"]?(.+?)['"]?\s*\)|(["'])((?:\\.|[^\\])*?)\3)([^;]*);(?:})?/g;/\/\*(.|[\r\n])*?\*\//gm.exec(n)!=null&&(n=stripCssComments(n));for(var r,o=n;(r=t.exec(n))!==null;){o=o.replace(r[0],"");const a=document.createElement("link");a.rel="stylesheet",a.href=r[2]||r[4];const s=r[1]||r[5];s&&(a.media=s),i===document?document.head.appendChild(a):i.appendChild(a)}return o},addAdoptedStyleSafariPolyfill=(n,i,t)=>(t?i.adoptedStyleSheets=[n,...i.adoptedStyleSheets]:i.adoptedStyleSheets=[...i.adoptedStyleSheets,n],()=>{i.adoptedStyleSheets=i.adoptedStyleSheets.filter(r=>r!==n)}),addAdoptedStyle=(n,i,t)=>{const r=new CSSStyleSheet;return r.replaceSync(n),polyfilledSafari?addAdoptedStyleSafariPolyfill(r,i,t):(t?i.adoptedStyleSheets.splice(0,0,r):i.adoptedStyleSheets.push(r),()=>{i.adoptedStyleSheets.splice(i.adoptedStyleSheets.indexOf(r),1)})},addStyleTag=(n,i)=>{const t=document.createElement("style");t.type="text/css",t.textContent=n;let r;if(i){const a=Array.from(document.head.childNodes).filter(s=>s.nodeType===Node.COMMENT_NODE).find(s=>s.data.trim()===i);a&&(r=a)}return document.head.insertBefore(t,r),()=>{t.remove()}},injectGlobalCss=(n,i,t,r)=>{if(t===document){const a=getHash(n);if(window.Vaadin.theme.injectedGlobalCss.indexOf(a)!==-1)return;window.Vaadin.theme.injectedGlobalCss.push(a)}const o=createLinkReferences(n,t);return t===document?addStyleTag(o,i):addAdoptedStyle(o,t,r)};window.Vaadin=window.Vaadin||{};window.Vaadin.theme=window.Vaadin.theme||{};window.Vaadin.theme.injectedGlobalCss=[];function hashFnv32a(n){let i,t,r=2166136261;for(i=0,t=n.length;i<t;i++)r^=n.charCodeAt(i),r+=(r<<1)+(r<<4)+(r<<7)+(r<<8)+(r<<24);return("0000000"+(r>>>0).toString(16)).substr(-8)}function getHash(n){let i=hashFnv32a(n);return i+hashFnv32a(i+n)}/**
  * @license
@@ -12,7 +12,7 @@ import{C as CSSResult,c as css$e,u as unsafeCSS,D as Directive,n as nothing,P as
       was finalized before a style module was registered.
       Make sure to add component specific style modules before
       importing the corresponding custom element.`),i=flattenStyles(i),window.Vaadin&&window.Vaadin.styleModules?window.Vaadin.styleModules.registerStyles(n,i,t):themeRegistry.push({themeFor:n,styles:i,include:t.include,moduleId:t.moduleId})}function getAllThemes$1(){return window.Vaadin&&window.Vaadin.styleModules?window.Vaadin.styleModules.getAllThemes():themeRegistry}function matchesThemeFor(n,i){return(n||"").split(" ").some(t=>new RegExp(`^${t.split("*").join(".*")}$`,"u").test(i))}function getIncludePriority(n=""){let i=0;return n.startsWith("lumo-")||n.startsWith("material-")?i=1:n.startsWith("vaadin-")&&(i=2),i}function getIncludedStyles(n){const i=[];return n.include&&[].concat(n.include).forEach(t=>{const r=getAllThemes$1().find(o=>o.moduleId===t);r?i.push(...getIncludedStyles(r),...r.styles):console.warn(`Included moduleId ${t} not found in style registry`)},n.styles),i}function addStylesToTemplate(n,i){const t=document.createElement("style");t.innerHTML=n.map(r=>r.cssText).join(`
-`),i.content.appendChild(t)}function getThemes(n){const i=`${n}-default-theme`,t=getAllThemes$1().filter(r=>r.moduleId!==i&&matchesThemeFor(r.themeFor,n)).map(r=>({...r,styles:[...getIncludedStyles(r),...r.styles],includePriority:getIncludePriority(r.moduleId)})).sort((r,o)=>o.includePriority-r.includePriority);return t.length>0?t:getAllThemes$1().filter(r=>r.moduleId===i)}const ThemableMixin=n=>class extends ThemePropertyMixin(n){static finalize(){if(super.finalize(),this.elementStyles)return;const t=this.prototype._template;!t||classHasThemes(this)||addStylesToTemplate(this.getStylesForThis(),t)}static finalizeStyles(t){const r=this.getStylesForThis();return t?[...super.finalizeStyles(t),...r]:r}static getStylesForThis(){const t=Object.getPrototypeOf(this.prototype),r=(t?t.constructor.__themes:[])||[];this.__themes=[...r,...getThemes(this.is)];const o=this.__themes.flatMap(a=>a.styles);return o.filter((a,s)=>s===o.lastIndexOf(a))}},$cssFromFile_0=css$e`.custom-dialog{width:60%!important;padding:20px;margin:0 auto}.dialog-title{display:flex;justify-content:center;align-items:center;text-align:center;font-size:30px;font-weight:700;margin-bottom:10px}.custom-dialog input,.custom-dialog .vaadin-date-picker{width:100%!important;margin-bottom:10px}.custom-search-field{width:100%;max-width:none}
+`),i.content.appendChild(t)}function getThemes(n){const i=`${n}-default-theme`,t=getAllThemes$1().filter(r=>r.moduleId!==i&&matchesThemeFor(r.themeFor,n)).map(r=>({...r,styles:[...getIncludedStyles(r),...r.styles],includePriority:getIncludePriority(r.moduleId)})).sort((r,o)=>o.includePriority-r.includePriority);return t.length>0?t:getAllThemes$1().filter(r=>r.moduleId===i)}const ThemableMixin=n=>class extends ThemePropertyMixin(n){static finalize(){if(super.finalize(),this.elementStyles)return;const t=this.prototype._template;!t||classHasThemes(this)||addStylesToTemplate(this.getStylesForThis(),t)}static finalizeStyles(t){const r=this.getStylesForThis();return t?[...super.finalizeStyles(t),...r]:r}static getStylesForThis(){const t=Object.getPrototypeOf(this.prototype),r=(t?t.constructor.__themes:[])||[];this.__themes=[...r,...getThemes(this.is)];const o=this.__themes.flatMap(a=>a.styles);return o.filter((a,s)=>s===o.lastIndexOf(a))}},$cssFromFile_0=css$e`.custom-dialog{width:60%!important;padding:20px;margin:0 auto}.dialog-title{display:flex;justify-content:center;align-items:center;text-align:center;font-size:30px;font-weight:700;margin-bottom:10px}.custom-dialog input,.custom-dialog .vaadin-date-picker{width:100%!important;margin-bottom:10px}.custom-search-field{width:100%;max-width:none}vaadin-date-picker::part(input-field){font-size:var(--lumo-font-size-s);text-align:right}vaadin-date-picker[theme~=helper-above-field]::part(helper-text){position:absolute;top:-1.5em;left:0}.employee-details-view{display:flex;flex-direction:column;align-items:stretch}.employee-info-container,.leave-grid-container{width:100%;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:16px}.employee-info-layout{display:flex;align-items:center;border-radius:3%}.employee-photo{margin-left:8px;max-width:150px;max-height:150px;margin-right:16px;border-radius:50%;object-fit:cover}.employee-info-details{flex-grow:1}.leave-grid{width:100%;margin-top:16px}.name{font-size:24px;font-weight:700;color:#2e3b55;margin-bottom:16px;text-align:center;position:relative;margin-left:3px;margin-top:5px}.employee-details{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;justify-items:start;align-items:center;margin-left:10px}.tckn,.birthDate,.phone,.status,.employmentDate{font-size:16px;color:#555}.employee-info-grid{display:grid;grid-template-columns:1fr 1fr;row-gap:15px;justify-items:start;align-items:center;column-gap:50px}.edit-icon{cursor:pointer;position:absolute;top:2px;right:10px;z-index:1}.icon-container{position:relative;width:20px;margin-bottom:200px}.custom-avatar{width:150px;height:150px;border-radius:50%;object-fit:cover;margin-left:8px;margin-right:16px}.header{margin:0;font-size:1.5em}
 `;/**
 @license
 Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
@@ -1218,7 +1218,285 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </style>
 
       <slot></slot>
-    `}static get is(){return"vaadin-vertical-layout"}}customElements.define(VerticalLayout.is,VerticalLayout);/**
+    `}static get is(){return"vaadin-vertical-layout"}}customElements.define(VerticalLayout.is,VerticalLayout);registerStyles$1("vaadin-app-layout",css$e`
+    [part='navbar'],
+    [part='drawer'] {
+      background-color: var(--lumo-base-color);
+      background-clip: padding-box;
+    }
+
+    [part='navbar'] {
+      min-height: var(--lumo-size-xl);
+      border-bottom: 1px solid var(--lumo-contrast-10pct);
+    }
+
+    [part='navbar'][bottom] {
+      border-bottom: none;
+      border-top: 1px solid var(--lumo-contrast-10pct);
+    }
+
+    [part='drawer'] {
+      border-inline-end: 1px solid var(--lumo-contrast-10pct);
+    }
+
+    :host([overlay]) [part='drawer'] {
+      border-inline-end: none;
+      box-shadow: var(--lumo-box-shadow-s);
+    }
+
+    :host([primary-section='navbar']) [part='navbar'] {
+      border: none;
+      background-image: linear-gradient(var(--lumo-contrast-5pct), var(--lumo-contrast-5pct));
+    }
+
+    :host([primary-section='drawer']:not([overlay])) [part='drawer'] {
+      background-image: linear-gradient(var(--lumo-shade-5pct), var(--lumo-shade-5pct));
+    }
+
+    [part='backdrop'] {
+      background-color: var(--lumo-shade-20pct);
+      opacity: 1;
+    }
+
+    [part] ::slotted(h2),
+    [part] ::slotted(h3),
+    [part] ::slotted(h4) {
+      margin-top: var(--lumo-space-xs) !important;
+      margin-bottom: var(--lumo-space-xs) !important;
+    }
+  `,{moduleId:"lumo-app-layout"});const template$9=document.createElement("template");template$9.innerHTML=`
+  <style>
+    /* Use units so that the values can be used in calc() */
+    html {
+      --safe-area-inset-top: env(safe-area-inset-top, 0px);
+      --safe-area-inset-right: env(safe-area-inset-right, 0px);
+      --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-area-inset-left: env(safe-area-inset-left, 0px);
+    }
+  </style>
+`;document.head.appendChild(template$9.content);/**
+ * @license
+ * Copyright (c) 2021 - 2023 Vaadin Ltd.
+ * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
+ */const testUserAgent=n=>n.test(navigator.userAgent),testPlatform=n=>n.test(navigator.platform),testVendor=n=>n.test(navigator.vendor),isAndroid=testUserAgent(/Android/u),isChrome=testUserAgent(/Chrome/u)&&testVendor(/Google Inc/u),isFirefox$4=testUserAgent(/Firefox/u),isIPad=testPlatform(/^iPad/u)||testPlatform(/^Mac/u)&&navigator.maxTouchPoints>1,isIPhone=testPlatform(/^iPhone/u),isIOS=isIPhone||isIPad,isSafari=testUserAgent(/^((?!chrome|android).)*safari/iu),isTouch=(()=>{try{return document.createEvent("TouchEvent"),!0}catch{return!1}})();/**
+ * @license
+ * Copyright (c) 2018 - 2023 Vaadin Ltd.
+ * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
+ */function _detectIosNavbar(){if(isIOS){const n=window.innerHeight,t=window.innerWidth>n,r=document.documentElement.clientHeight;t&&r>n?document.documentElement.style.setProperty("--vaadin-viewport-offset-bottom",`${r-n}px`):document.documentElement.style.setProperty("--vaadin-viewport-offset-bottom","")}}_detectIosNavbar();window.addEventListener("resize",_detectIosNavbar);/**
+@license
+Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/function newSplice(n,i,t){return{index:n,removed:i,addedCount:t}}const EDIT_LEAVE=0,EDIT_UPDATE=1,EDIT_ADD=2,EDIT_DELETE=3;function calcEditDistances(n,i,t,r,o,a){let s=a-o+1,l=t-i+1,h=new Array(s);for(let c=0;c<s;c++)h[c]=new Array(l),h[c][0]=c;for(let c=0;c<l;c++)h[0][c]=c;for(let c=1;c<s;c++)for(let d=1;d<l;d++)if(equals$3(n[i+d-1],r[o+c-1]))h[c][d]=h[c-1][d-1];else{let u=h[c-1][d]+1,p=h[c][d-1]+1;h[c][d]=u<p?u:p}return h}function spliceOperationsFromEditDistances(n){let i=n.length-1,t=n[0].length-1,r=n[i][t],o=[];for(;i>0||t>0;){if(i==0){o.push(EDIT_ADD),t--;continue}if(t==0){o.push(EDIT_DELETE),i--;continue}let a=n[i-1][t-1],s=n[i-1][t],l=n[i][t-1],h;s<l?h=s<a?s:a:h=l<a?l:a,h==a?(a==r?o.push(EDIT_LEAVE):(o.push(EDIT_UPDATE),r=a),i--,t--):h==s?(o.push(EDIT_DELETE),i--,r=s):(o.push(EDIT_ADD),t--,r=l)}return o.reverse(),o}function calcSplices(n,i,t,r,o,a){let s=0,l=0,h,c=Math.min(t-i,a-o);if(i==0&&o==0&&(s=sharedPrefix(n,r,c)),t==n.length&&a==r.length&&(l=sharedSuffix(n,r,c-s)),i+=s,o+=s,t-=l,a-=l,t-i==0&&a-o==0)return[];if(i==t){for(h=newSplice(i,[],0);o<a;)h.removed.push(r[o++]);return[h]}else if(o==a)return[newSplice(i,[],t-i)];let d=spliceOperationsFromEditDistances(calcEditDistances(n,i,t,r,o,a));h=void 0;let u=[],p=i,f=o;for(let v=0;v<d.length;v++)switch(d[v]){case EDIT_LEAVE:h&&(u.push(h),h=void 0),p++,f++;break;case EDIT_UPDATE:h||(h=newSplice(p,[],0)),h.addedCount++,p++,h.removed.push(r[f]),f++;break;case EDIT_ADD:h||(h=newSplice(p,[],0)),h.addedCount++,p++;break;case EDIT_DELETE:h||(h=newSplice(p,[],0)),h.removed.push(r[f]),f++;break}return h&&u.push(h),u}function sharedPrefix(n,i,t){for(let r=0;r<t;r++)if(!equals$3(n[r],i[r]))return r;return t}function sharedSuffix(n,i,t){let r=n.length,o=i.length,a=0;for(;a<t&&equals$3(n[--r],i[--o]);)a++;return a}function calculateSplices(n,i){return calcSplices(n,0,n.length,i,0,i.length)}function equals$3(n,i){return n===i}/**
+@license
+Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/function isSlot(n){return n.localName==="slot"}let FlattenedNodesObserver=class{static getFlattenedNodes(n){const i=wrap$f(n);return isSlot(n)?(n=n,i.assignedNodes({flatten:!0})):Array.from(i.childNodes).map(t=>isSlot(t)?(t=t,wrap$f(t).assignedNodes({flatten:!0})):[t]).reduce((t,r)=>t.concat(r),[])}constructor(n,i){this._shadyChildrenObserver=null,this._nativeChildrenObserver=null,this._connected=!1,this._target=n,this.callback=i,this._effectiveNodes=[],this._observer=null,this._scheduled=!1,this._boundSchedule=()=>{this._schedule()},this.connect(),this._schedule()}connect(){isSlot(this._target)?this._listenSlots([this._target]):wrap$f(this._target).children&&(this._listenSlots(wrap$f(this._target).children),window.ShadyDOM?this._shadyChildrenObserver=window.ShadyDOM.observeChildren(this._target,n=>{this._processMutations(n)}):(this._nativeChildrenObserver=new MutationObserver(n=>{this._processMutations(n)}),this._nativeChildrenObserver.observe(this._target,{childList:!0}))),this._connected=!0}disconnect(){isSlot(this._target)?this._unlistenSlots([this._target]):wrap$f(this._target).children&&(this._unlistenSlots(wrap$f(this._target).children),window.ShadyDOM&&this._shadyChildrenObserver?(window.ShadyDOM.unobserveChildren(this._shadyChildrenObserver),this._shadyChildrenObserver=null):this._nativeChildrenObserver&&(this._nativeChildrenObserver.disconnect(),this._nativeChildrenObserver=null)),this._connected=!1}_schedule(){this._scheduled||(this._scheduled=!0,microTask$1.run(()=>this.flush()))}_processMutations(n){this._processSlotMutations(n),this.flush()}_processSlotMutations(n){if(n)for(let i=0;i<n.length;i++){let t=n[i];t.addedNodes&&this._listenSlots(t.addedNodes),t.removedNodes&&this._unlistenSlots(t.removedNodes)}}flush(){if(!this._connected)return!1;window.ShadyDOM&&ShadyDOM.flush(),this._nativeChildrenObserver?this._processSlotMutations(this._nativeChildrenObserver.takeRecords()):this._shadyChildrenObserver&&this._processSlotMutations(this._shadyChildrenObserver.takeRecords()),this._scheduled=!1;let n={target:this._target,addedNodes:[],removedNodes:[]},i=this.constructor.getFlattenedNodes(this._target),t=calculateSplices(i,this._effectiveNodes);for(let o=0,a;o<t.length&&(a=t[o]);o++)for(let s=0,l;s<a.removed.length&&(l=a.removed[s]);s++)n.removedNodes.push(l);for(let o=0,a;o<t.length&&(a=t[o]);o++)for(let s=a.index;s<a.index+a.addedCount;s++)n.addedNodes.push(i[s]);this._effectiveNodes=i;let r=!1;return(n.addedNodes.length||n.removedNodes.length)&&(r=!0,this.callback.call(this._target,n)),r}_listenSlots(n){for(let i=0;i<n.length;i++){let t=n[i];isSlot(t)&&t.addEventListener("slotchange",this._boundSchedule)}}_unlistenSlots(n){for(let i=0;i<n.length;i++){let t=n[i];isSlot(t)&&t.removeEventListener("slotchange",this._boundSchedule)}}};/**
+@license
+Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/let scheduled=!1,beforeRenderQueue=[],afterRenderQueue=[];function schedule(){scheduled=!0,requestAnimationFrame(function(){scheduled=!1,flushQueue(beforeRenderQueue),setTimeout(function(){runQueue(afterRenderQueue)})})}function flushQueue(n){for(;n.length;)callMethod(n.shift())}function runQueue(n){for(let i=0,t=n.length;i<t;i++)callMethod(n.shift())}function callMethod(n){const i=n[0],t=n[1],r=n[2];try{t.apply(i,r)}catch(o){setTimeout(()=>{throw o})}}function beforeNextRender(n,i,t){scheduled||schedule(),beforeRenderQueue.push([n,i,t])}function afterNextRender(n,i,t){scheduled||schedule(),afterRenderQueue.push([n,i,t])}/**
+ * @license
+ * Copyright (c) 2021 - 2023 Vaadin Ltd.
+ * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
+ */let keyboardActive=!1;window.addEventListener("keydown",()=>{keyboardActive=!0},{capture:!0});window.addEventListener("mousedown",()=>{keyboardActive=!1},{capture:!0});function getDeepActiveElement(){let n=document.activeElement||document.body;for(;n.shadowRoot&&n.shadowRoot.activeElement;)n=n.shadowRoot.activeElement;return n}function isKeyboardActive(){return keyboardActive}function isElementHiddenDirectly(n){const i=n.style;if(i.visibility==="hidden"||i.display==="none")return!0;const t=window.getComputedStyle(n);return t.visibility==="hidden"||t.display==="none"}function hasLowerTabOrder(n,i){const t=Math.max(n.tabIndex,0),r=Math.max(i.tabIndex,0);return t===0||r===0?r>t:t>r}function mergeSortByTabIndex(n,i){const t=[];for(;n.length>0&&i.length>0;)hasLowerTabOrder(n[0],i[0])?t.push(i.shift()):t.push(n.shift());return t.concat(n,i)}function sortElementsByTabIndex(n){const i=n.length;if(i<2)return n;const t=Math.ceil(i/2),r=sortElementsByTabIndex(n.slice(0,t)),o=sortElementsByTabIndex(n.slice(t));return mergeSortByTabIndex(r,o)}function isElementHidden(n){return n.offsetParent===null&&n.clientWidth===0&&n.clientHeight===0?!0:isElementHiddenDirectly(n)}function isElementFocusable(n){return n.matches('[tabindex="-1"]')?!1:n.matches("input, select, textarea, button, object")?n.matches(":not([disabled])"):n.matches("a[href], area[href], iframe, [tabindex], [contentEditable]")}function isElementFocused(n){return n.getRootNode().activeElement===n}function normalizeTabIndex(n){if(!isElementFocusable(n))return-1;const i=n.getAttribute("tabindex")||0;return Number(i)}function collectFocusableNodes(n,i){if(n.nodeType!==Node.ELEMENT_NODE||isElementHiddenDirectly(n))return!1;const t=n,r=normalizeTabIndex(t);let o=r>0;r>=0&&i.push(t);let a=[];return t.localName==="slot"?a=t.assignedNodes({flatten:!0}):a=(t.shadowRoot||t).children,[...a].forEach(s=>{o=collectFocusableNodes(s,i)||o}),o}function getFocusableElements(n){const i=[];return collectFocusableNodes(n,i)?sortElementsByTabIndex(i):i}/**
+ * @license
+ * Copyright (c) 2021 - 2023 Vaadin Ltd.
+ * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
+ */const instances=[];class FocusTrapController{constructor(i){this.host=i,this.__trapNode=null,this.__onKeyDown=this.__onKeyDown.bind(this)}get __focusableElements(){return getFocusableElements(this.__trapNode)}get __focusedElementIndex(){const i=this.__focusableElements;return i.indexOf(i.filter(isElementFocused).pop())}hostConnected(){document.addEventListener("keydown",this.__onKeyDown)}hostDisconnected(){document.removeEventListener("keydown",this.__onKeyDown)}trapFocus(i){if(this.__trapNode=i,this.__focusableElements.length===0)throw this.__trapNode=null,new Error("The trap node should have at least one focusable descendant or be focusable itself.");instances.push(this),this.__focusedElementIndex===-1&&this.__focusableElements[0].focus()}releaseFocus(){this.__trapNode=null,instances.pop()}__onKeyDown(i){if(this.__trapNode&&this===Array.from(instances).pop()&&i.key==="Tab"){i.preventDefault();const t=i.shiftKey;this.__focusNextElement(t)}}__focusNextElement(i=!1){const t=this.__focusableElements,r=i?-1:1,o=this.__focusedElementIndex,a=(t.length+o+r)%t.length,s=t[a];s.focus(),s.localName==="input"&&s.select()}}/**
+ * @license
+ * Copyright (c) 2021 - 2023 Vaadin Ltd.
+ * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
+ */const ControllerMixin=dedupingMixin(n=>class extends n{constructor(){super(),this.__controllers=new Set}connectedCallback(){super.connectedCallback(),this.__controllers.forEach(t=>{t.hostConnected&&t.hostConnected()})}disconnectedCallback(){super.disconnectedCallback(),this.__controllers.forEach(t=>{t.hostDisconnected&&t.hostDisconnected()})}addController(t){this.__controllers.add(t),this.$!==void 0&&this.isConnected&&t.hostConnected&&t.hostConnected()}removeController(t){this.__controllers.delete(t)}});/**
+ * @license
+ * Copyright (c) 2018 - 2023 Vaadin Ltd.
+ * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
+ */class AppLayout extends ElementMixin(ThemableMixin(ControllerMixin(PolymerElement))){static get template(){return html`
+      <style>
+        :host {
+          display: block;
+          box-sizing: border-box;
+          height: 100%;
+          --vaadin-app-layout-transition: 200ms;
+          transition: padding var(--vaadin-app-layout-transition);
+          --vaadin-app-layout-touch-optimized: false;
+          --vaadin-app-layout-navbar-offset-top: var(--_vaadin-app-layout-navbar-offset-size);
+          --vaadin-app-layout-navbar-offset-bottom: var(--_vaadin-app-layout-navbar-offset-size-bottom);
+          padding-block: var(--vaadin-app-layout-navbar-offset-top) var(--vaadin-app-layout-navbar-offset-bottom);
+          padding-inline-start: var(--vaadin-app-layout-navbar-offset-left);
+        }
+
+        :host([hidden]),
+        [hidden] {
+          display: none !important;
+        }
+
+        :host([no-anim]) {
+          --vaadin-app-layout-transition: none !important;
+        }
+
+        :host([drawer-opened]) {
+          --vaadin-app-layout-drawer-offset-left: var(--_vaadin-app-layout-drawer-offset-size);
+        }
+
+        :host([overlay]) {
+          --vaadin-app-layout-drawer-offset-left: 0;
+          --vaadin-app-layout-navbar-offset-left: 0;
+        }
+
+        :host(:not([no-scroll])) [content] {
+          overflow: auto;
+        }
+
+        [content] {
+          height: 100%;
+        }
+
+        @media (pointer: coarse) and (max-width: 800px) and (min-height: 500px) {
+          :host {
+            --vaadin-app-layout-touch-optimized: true;
+          }
+        }
+
+        [part='navbar'] {
+          position: fixed;
+          display: flex;
+          align-items: center;
+          top: 0;
+          inset-inline: 0;
+          transition: inset-inline-start var(--vaadin-app-layout-transition);
+          padding-top: var(--safe-area-inset-top);
+          padding-left: var(--safe-area-inset-left);
+          padding-right: var(--safe-area-inset-right);
+          z-index: 1;
+        }
+
+        :host([primary-section='drawer'][drawer-opened]:not([overlay])) [part='navbar'] {
+          inset-inline-start: var(--vaadin-app-layout-drawer-offset-left, 0);
+        }
+
+        :host([primary-section='drawer']) [part='drawer'] {
+          top: 0;
+        }
+
+        [part='navbar'][bottom] {
+          top: auto;
+          bottom: 0;
+          padding-bottom: var(--safe-area-inset-bottom);
+        }
+
+        [part='drawer'] {
+          overflow: auto;
+          position: fixed;
+          top: var(--vaadin-app-layout-navbar-offset-top, 0);
+          bottom: var(--vaadin-app-layout-navbar-offset-bottom, var(--vaadin-viewport-offset-bottom, 0));
+          inset-inline: var(--vaadin-app-layout-navbar-offset-left, 0) auto;
+          transition: transform var(--vaadin-app-layout-transition), visibility var(--vaadin-app-layout-transition);
+          transform: translateX(-100%);
+          max-width: 90%;
+          width: 16em;
+          box-sizing: border-box;
+          padding: var(--safe-area-inset-top) 0 var(--safe-area-inset-bottom) var(--safe-area-inset-left);
+          outline: none;
+          /* The drawer should be inaccessible by the tabbing navigation when it is closed. */
+          visibility: hidden;
+          display: flex;
+          flex-direction: column;
+        }
+
+        :host([drawer-opened]) [part='drawer'] {
+          /* The drawer should be accessible by the tabbing navigation when it is opened. */
+          visibility: visible;
+          transform: translateX(0%);
+          touch-action: manipulation;
+        }
+
+        [part='backdrop'] {
+          background-color: #000;
+          opacity: 0.3;
+        }
+
+        :host(:not([drawer-opened])) [part='backdrop'] {
+          opacity: 0;
+        }
+
+        :host([overlay]) [part='backdrop'] {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          transition: opacity var(--vaadin-app-layout-transition);
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        :host([overlay]) [part='drawer'] {
+          top: 0;
+          bottom: 0;
+        }
+
+        :host([overlay]) [part='drawer'],
+        :host([overlay]) [part='backdrop'] {
+          z-index: 2;
+        }
+
+        :host([drawer-opened][overlay]) [part='backdrop'] {
+          pointer-events: auto;
+          touch-action: manipulation;
+        }
+
+        :host([dir='rtl']) [part='drawer'] {
+          transform: translateX(100%);
+        }
+
+        :host([dir='rtl'][drawer-opened]) [part='drawer'] {
+          transform: translateX(0%);
+        }
+
+        :host([drawer-opened]:not([overlay])) {
+          padding-inline-start: var(--vaadin-app-layout-drawer-offset-left);
+        }
+
+        @media (max-width: 800px), (max-height: 600px) {
+          :host {
+            --vaadin-app-layout-drawer-overlay: true;
+          }
+
+          [part='drawer'] {
+            width: 20em;
+          }
+        }
+
+        /* If a vaadin-scroller is used in the drawer, allow it to take all remaining space and contain scrolling */
+        [part='drawer'] ::slotted(vaadin-scroller) {
+          flex: 1;
+          overscroll-behavior: contain;
+        }
+      </style>
+      <div part="navbar" id="navbarTop">
+        <slot name="navbar"></slot>
+      </div>
+      <div part="backdrop" on-click="_onBackdropClick" on-touchend="_onBackdropTouchend"></div>
+      <div part="drawer" id="drawer" on-keydown="__onDrawerKeyDown">
+        <slot name="drawer" id="drawerSlot"></slot>
+      </div>
+      <div content>
+        <slot></slot>
+      </div>
+      <div part="navbar" id="navbarBottom" bottom hidden>
+        <slot name="navbar-bottom"></slot>
+      </div>
+      <div hidden><slot id="touchSlot" name="navbar touch-optimized"></slot></div>
+    `}static get is(){return"vaadin-app-layout"}static get properties(){return{i18n:{type:Object,observer:"__i18nChanged",value:()=>({drawer:"Drawer"})},primarySection:{type:String,value:"navbar",notify:!0,reflectToAttribute:!0,observer:"__primarySectionChanged"},drawerOpened:{type:Boolean,notify:!0,value:!0,reflectToAttribute:!0,observer:"__drawerOpenedChanged"},overlay:{type:Boolean,notify:!0,readOnly:!0,value:!1,reflectToAttribute:!0},closeDrawerOn:{type:String,value:"vaadin-router-location-changed",observer:"_closeDrawerOnChanged"}}}static dispatchCloseOverlayDrawerEvent(){window.dispatchEvent(new CustomEvent("close-overlay-drawer"))}constructor(){super(),this.__boundResizeListener=this._resize.bind(this),this.__drawerToggleClickListener=this._drawerToggleClick.bind(this),this.__closeOverlayDrawerListener=this.__closeOverlayDrawer.bind(this),this.__trapFocusInDrawer=this.__trapFocusInDrawer.bind(this),this.__releaseFocusFromDrawer=this.__releaseFocusFromDrawer.bind(this),this.__focusTrapController=new FocusTrapController(this)}connectedCallback(){super.connectedCallback(),this._blockAnimationUntilAfterNextRender(),window.addEventListener("resize",this.__boundResizeListener),this.addEventListener("drawer-toggle-click",this.__drawerToggleClickListener),beforeNextRender(this,this._afterFirstRender),this._updateTouchOptimizedMode();const i=this.$.navbarTop.firstElementChild;this._navbarChildObserver=new FlattenedNodesObserver(i,()=>{this._updateTouchOptimizedMode()}),this._touchChildObserver=new FlattenedNodesObserver(this.$.touchSlot,()=>{this._updateTouchOptimizedMode()}),this._drawerChildObserver=new FlattenedNodesObserver(this.$.drawerSlot,()=>{this._updateDrawerSize()}),this._updateDrawerSize(),this._updateOverlayMode(),this._navbarSizeObserver=new ResizeObserver(()=>{requestAnimationFrame(()=>{this._blockAnimationUntilAfterNextRender(),this._updateOffsetSize()})}),this._navbarSizeObserver.observe(this.$.navbarTop),this._navbarSizeObserver.observe(this.$.navbarBottom),window.addEventListener("close-overlay-drawer",this.__closeOverlayDrawerListener)}ready(){super.ready(),this.addController(this.__focusTrapController),this.__setAriaExpanded()}disconnectedCallback(){super.disconnectedCallback(),this._navbarChildObserver&&this._navbarChildObserver.disconnect(),this._drawerChildObserver&&this._drawerChildObserver.disconnect(),this._touchChildObserver&&this._touchChildObserver.disconnect(),window.removeEventListener("resize",this.__boundResizeListener),this.removeEventListener("drawer-toggle-click",this.__drawerToggleClickListener),window.removeEventListener("close-overlay-drawer",this.__drawerToggleClickListener)}__primarySectionChanged(i){["navbar","drawer"].includes(i)||this.set("primarySection","navbar")}__drawerOpenedChanged(i,t){this.overlay&&(i?this.__trapFocusInDrawer():t&&this.__releaseFocusFromDrawer()),this.__setAriaExpanded()}__i18nChanged(){this.__updateDrawerAriaAttributes()}_afterFirstRender(){this._blockAnimationUntilAfterNextRender(),this._updateOffsetSize()}_drawerToggleClick(i){i.stopPropagation(),this.drawerOpened=!this.drawerOpened}__closeOverlayDrawer(){this.overlay&&(this.drawerOpened=!1)}__setAriaExpanded(){const i=this.querySelector("vaadin-drawer-toggle");i&&i.setAttribute("aria-expanded",this.drawerOpened)}_updateDrawerSize(){const i=this.querySelectorAll("[slot=drawer]").length,t=this.$.drawer;i===0?t.setAttribute("hidden",""):t.removeAttribute("hidden"),this._updateOffsetSize()}_resize(){this._blockAnimationUntilAfterNextRender(),this._updateTouchOptimizedMode(),this._updateOverlayMode()}_updateOffsetSize(){const t=this.$.navbarTop.getBoundingClientRect(),o=this.$.navbarBottom.getBoundingClientRect();this.style.setProperty("--_vaadin-app-layout-navbar-offset-size",`${t.height}px`),this.style.setProperty("--_vaadin-app-layout-navbar-offset-size-bottom",`${o.height}px`);const s=this.$.drawer.getBoundingClientRect();this.style.setProperty("--_vaadin-app-layout-drawer-offset-size",`${s.width}px`)}_updateOverlayMode(){const i=this._getCustomPropertyValue("--vaadin-app-layout-drawer-overlay")==="true";!this.overlay&&i&&(this._drawerStateSaved=this.drawerOpened,this.drawerOpened=!1),this._setOverlay(i),!this.overlay&&this._drawerStateSaved&&(this.drawerOpened=this._drawerStateSaved,this._drawerStateSaved=null),this.__updateDrawerAriaAttributes()}__updateDrawerAriaAttributes(){const i=this.$.drawer;this.overlay?(i.setAttribute("role","dialog"),i.setAttribute("aria-modal","true"),i.setAttribute("aria-label",this.i18n.drawer)):(i.removeAttribute("role"),i.removeAttribute("aria-modal"),i.removeAttribute("aria-label"))}__drawerTransitionComplete(){return new Promise(i=>{if(this._getCustomPropertyValue("--vaadin-app-layout-transition")==="none"){i();return}this.$.drawer.addEventListener("transitionend",i,{once:!0})})}async __trapFocusInDrawer(){await this.__drawerTransitionComplete(),this.drawerOpened&&(this.$.drawer.setAttribute("tabindex","0"),this.__focusTrapController.trapFocus(this.$.drawer))}async __releaseFocusFromDrawer(){if(await this.__drawerTransitionComplete(),this.drawerOpened)return;this.__focusTrapController.releaseFocus(),this.$.drawer.removeAttribute("tabindex");const i=this.querySelector("vaadin-drawer-toggle");i&&(i.focus(),i.setAttribute("focus-ring","focus"))}__onDrawerKeyDown(i){i.key==="Escape"&&this.overlay&&(this.drawerOpened=!1)}_closeDrawerOnChanged(i,t){t&&window.removeEventListener(t,this.__closeOverlayDrawerListener),i&&window.addEventListener(i,this.__closeOverlayDrawerListener)}_onBackdropClick(){this._close()}_onBackdropTouchend(i){i.preventDefault(),this._close()}_close(){this.drawerOpened=!1}_getCustomPropertyValue(i){return(getComputedStyle(this).getPropertyValue(i)||"").trim().toLowerCase()}_updateTouchOptimizedMode(){const i=this._getCustomPropertyValue("--vaadin-app-layout-touch-optimized")==="true",t=this.querySelectorAll('[slot*="navbar"]');t.length>0&&Array.from(t).forEach(r=>{r.getAttribute("slot").indexOf("touch-optimized")>-1&&(r.__touchOptimized=!0),i&&r.__touchOptimized?r.setAttribute("slot","navbar-bottom"):r.setAttribute("slot","navbar")}),this.$.navbarTop.querySelector("[name=navbar]").assignedNodes().length===0?this.$.navbarTop.setAttribute("hidden",""):this.$.navbarTop.removeAttribute("hidden"),this.$.navbarBottom.querySelector("[name=navbar-bottom]").assignedNodes().length===0?this.$.navbarBottom.setAttribute("hidden",""):this.$.navbarBottom.removeAttribute("hidden"),this._updateOffsetSize()}_blockAnimationUntilAfterNextRender(){this.setAttribute("no-anim",""),afterNextRender(this,()=>{this.removeAttribute("no-anim")})}}customElements.define(AppLayout.is,AppLayout);/**
  * @license
  * Copyright (c) 2017 - 2023 Vaadin Ltd.
  * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
@@ -1345,18 +1623,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   }
 `;registerStyles$1("",overlay,{moduleId:"lumo-overlay"});registerStyles$1("vaadin-overlay",overlay,{moduleId:"lumo-vaadin-overlay"});/**
-@license
-Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/let scheduled=!1,beforeRenderQueue=[],afterRenderQueue=[];function schedule(){scheduled=!0,requestAnimationFrame(function(){scheduled=!1,flushQueue(beforeRenderQueue),setTimeout(function(){runQueue(afterRenderQueue)})})}function flushQueue(n){for(;n.length;)callMethod(n.shift())}function runQueue(n){for(let i=0,t=n.length;i<t;i++)callMethod(n.shift())}function callMethod(n){const i=n[0],t=n[1],r=n[2];try{t.apply(i,r)}catch(o){setTimeout(()=>{throw o})}}function beforeNextRender(n,i,t){scheduled||schedule(),beforeRenderQueue.push([n,i,t])}function afterNextRender(n,i,t){scheduled||schedule(),afterRenderQueue.push([n,i,t])}/**
- * @license
- * Copyright (c) 2021 - 2023 Vaadin Ltd.
- * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
- */const testUserAgent=n=>n.test(navigator.userAgent),testPlatform=n=>n.test(navigator.platform),testVendor=n=>n.test(navigator.vendor),isAndroid=testUserAgent(/Android/u),isChrome=testUserAgent(/Chrome/u)&&testVendor(/Google Inc/u),isFirefox$4=testUserAgent(/Firefox/u),isIPad=testPlatform(/^iPad/u)||testPlatform(/^Mac/u)&&navigator.maxTouchPoints>1,isIPhone=testPlatform(/^iPhone/u),isIOS=isIPhone||isIPad,isSafari=testUserAgent(/^((?!chrome|android).)*safari/iu),isTouch=(()=>{try{return document.createEvent("TouchEvent"),!0}catch{return!1}})();/**
  * @license
  * Copyright (c) 2021 - 2023 Vaadin Ltd.
  * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
@@ -1369,18 +1635,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
  * Copyright (c) 2021 - 2023 Vaadin Ltd.
  * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
  */class AriaModalController{constructor(i){this.host=i}showModal(){this.__showOthers=hideOthers(this.host)}close(){this.__showOthers&&(this.__showOthers(),this.__showOthers=null)}}/**
- * @license
- * Copyright (c) 2021 - 2023 Vaadin Ltd.
- * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
- */let keyboardActive=!1;window.addEventListener("keydown",()=>{keyboardActive=!0},{capture:!0});window.addEventListener("mousedown",()=>{keyboardActive=!1},{capture:!0});function getDeepActiveElement(){let n=document.activeElement||document.body;for(;n.shadowRoot&&n.shadowRoot.activeElement;)n=n.shadowRoot.activeElement;return n}function isKeyboardActive(){return keyboardActive}function isElementHiddenDirectly(n){const i=n.style;if(i.visibility==="hidden"||i.display==="none")return!0;const t=window.getComputedStyle(n);return t.visibility==="hidden"||t.display==="none"}function hasLowerTabOrder(n,i){const t=Math.max(n.tabIndex,0),r=Math.max(i.tabIndex,0);return t===0||r===0?r>t:t>r}function mergeSortByTabIndex(n,i){const t=[];for(;n.length>0&&i.length>0;)hasLowerTabOrder(n[0],i[0])?t.push(i.shift()):t.push(n.shift());return t.concat(n,i)}function sortElementsByTabIndex(n){const i=n.length;if(i<2)return n;const t=Math.ceil(i/2),r=sortElementsByTabIndex(n.slice(0,t)),o=sortElementsByTabIndex(n.slice(t));return mergeSortByTabIndex(r,o)}function isElementHidden(n){return n.offsetParent===null&&n.clientWidth===0&&n.clientHeight===0?!0:isElementHiddenDirectly(n)}function isElementFocusable(n){return n.matches('[tabindex="-1"]')?!1:n.matches("input, select, textarea, button, object")?n.matches(":not([disabled])"):n.matches("a[href], area[href], iframe, [tabindex], [contentEditable]")}function isElementFocused(n){return n.getRootNode().activeElement===n}function normalizeTabIndex(n){if(!isElementFocusable(n))return-1;const i=n.getAttribute("tabindex")||0;return Number(i)}function collectFocusableNodes(n,i){if(n.nodeType!==Node.ELEMENT_NODE||isElementHiddenDirectly(n))return!1;const t=n,r=normalizeTabIndex(t);let o=r>0;r>=0&&i.push(t);let a=[];return t.localName==="slot"?a=t.assignedNodes({flatten:!0}):a=(t.shadowRoot||t).children,[...a].forEach(s=>{o=collectFocusableNodes(s,i)||o}),o}function getFocusableElements(n){const i=[];return collectFocusableNodes(n,i)?sortElementsByTabIndex(i):i}/**
- * @license
- * Copyright (c) 2021 - 2023 Vaadin Ltd.
- * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
- */const instances=[];class FocusTrapController{constructor(i){this.host=i,this.__trapNode=null,this.__onKeyDown=this.__onKeyDown.bind(this)}get __focusableElements(){return getFocusableElements(this.__trapNode)}get __focusedElementIndex(){const i=this.__focusableElements;return i.indexOf(i.filter(isElementFocused).pop())}hostConnected(){document.addEventListener("keydown",this.__onKeyDown)}hostDisconnected(){document.removeEventListener("keydown",this.__onKeyDown)}trapFocus(i){if(this.__trapNode=i,this.__focusableElements.length===0)throw this.__trapNode=null,new Error("The trap node should have at least one focusable descendant or be focusable itself.");instances.push(this),this.__focusedElementIndex===-1&&this.__focusableElements[0].focus()}releaseFocus(){this.__trapNode=null,instances.pop()}__onKeyDown(i){if(this.__trapNode&&this===Array.from(instances).pop()&&i.key==="Tab"){i.preventDefault();const t=i.shiftKey;this.__focusNextElement(t)}}__focusNextElement(i=!1){const t=this.__focusableElements,r=i?-1:1,o=this.__focusedElementIndex,a=(t.length+o+r)%t.length,s=t[a];s.focus(),s.localName==="input"&&s.select()}}/**
- * @license
- * Copyright (c) 2021 - 2023 Vaadin Ltd.
- * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
- */const ControllerMixin=dedupingMixin(n=>class extends n{constructor(){super(),this.__controllers=new Set}connectedCallback(){super.connectedCallback(),this.__controllers.forEach(t=>{t.hostConnected&&t.hostConnected()})}disconnectedCallback(){super.disconnectedCallback(),this.__controllers.forEach(t=>{t.hostDisconnected&&t.hostDisconnected()})}addController(t){this.__controllers.add(t),this.$!==void 0&&this.isConnected&&t.hostConnected&&t.hostConnected()}removeController(t){this.__controllers.delete(t)}});/**
  * @license
  * Copyright (c) 2017 - 2023 Vaadin Ltd.
  * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
@@ -1602,14 +1856,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     }
   `);class UserTagsOverlay extends PositionMixin(Overlay){static get is(){return"vaadin-user-tags-overlay"}ready(){super.ready(),this.$.overlay.setAttribute("tabindex","-1")}}customElements.define(UserTagsOverlay.is,UserTagsOverlay);/**
-@license
-Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/function newSplice(n,i,t){return{index:n,removed:i,addedCount:t}}const EDIT_LEAVE=0,EDIT_UPDATE=1,EDIT_ADD=2,EDIT_DELETE=3;function calcEditDistances(n,i,t,r,o,a){let s=a-o+1,l=t-i+1,h=new Array(s);for(let c=0;c<s;c++)h[c]=new Array(l),h[c][0]=c;for(let c=0;c<l;c++)h[0][c]=c;for(let c=1;c<s;c++)for(let d=1;d<l;d++)if(equals$3(n[i+d-1],r[o+c-1]))h[c][d]=h[c-1][d-1];else{let u=h[c-1][d]+1,p=h[c][d-1]+1;h[c][d]=u<p?u:p}return h}function spliceOperationsFromEditDistances(n){let i=n.length-1,t=n[0].length-1,r=n[i][t],o=[];for(;i>0||t>0;){if(i==0){o.push(EDIT_ADD),t--;continue}if(t==0){o.push(EDIT_DELETE),i--;continue}let a=n[i-1][t-1],s=n[i-1][t],l=n[i][t-1],h;s<l?h=s<a?s:a:h=l<a?l:a,h==a?(a==r?o.push(EDIT_LEAVE):(o.push(EDIT_UPDATE),r=a),i--,t--):h==s?(o.push(EDIT_DELETE),i--,r=s):(o.push(EDIT_ADD),t--,r=l)}return o.reverse(),o}function calcSplices(n,i,t,r,o,a){let s=0,l=0,h,c=Math.min(t-i,a-o);if(i==0&&o==0&&(s=sharedPrefix(n,r,c)),t==n.length&&a==r.length&&(l=sharedSuffix(n,r,c-s)),i+=s,o+=s,t-=l,a-=l,t-i==0&&a-o==0)return[];if(i==t){for(h=newSplice(i,[],0);o<a;)h.removed.push(r[o++]);return[h]}else if(o==a)return[newSplice(i,[],t-i)];let d=spliceOperationsFromEditDistances(calcEditDistances(n,i,t,r,o,a));h=void 0;let u=[],p=i,f=o;for(let v=0;v<d.length;v++)switch(d[v]){case EDIT_LEAVE:h&&(u.push(h),h=void 0),p++,f++;break;case EDIT_UPDATE:h||(h=newSplice(p,[],0)),h.addedCount++,p++,h.removed.push(r[f]),f++;break;case EDIT_ADD:h||(h=newSplice(p,[],0)),h.addedCount++,p++;break;case EDIT_DELETE:h||(h=newSplice(p,[],0)),h.removed.push(r[f]),f++;break}return h&&u.push(h),u}function sharedPrefix(n,i,t){for(let r=0;r<t;r++)if(!equals$3(n[r],i[r]))return r;return t}function sharedSuffix(n,i,t){let r=n.length,o=i.length,a=0;for(;a<t&&equals$3(n[--r],i[--o]);)a++;return a}function calculateSplices(n,i){return calcSplices(n,0,n.length,i,0,i.length)}function equals$3(n,i){return n===i}/**
  * @license
  * Copyright (c) 2021 - 2023 Vaadin Ltd.
  * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
@@ -1996,14 +2242,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
  * Copyright (c) 2021 - 2023 Vaadin Ltd.
  * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
  */const DelegateStateMixin=dedupingMixin(n=>class extends n{static get properties(){return{stateTarget:{type:Object,observer:"_stateTargetChanged"}}}static get delegateAttrs(){return[]}static get delegateProps(){return[]}ready(){super.ready(),this._createDelegateAttrsObserver(),this._createDelegatePropsObserver()}_stateTargetChanged(t){t&&(this._ensureAttrsDelegated(),this._ensurePropsDelegated())}_createDelegateAttrsObserver(){this._createMethodObserver(`_delegateAttrsChanged(${this.constructor.delegateAttrs.join(", ")})`)}_createDelegatePropsObserver(){this._createMethodObserver(`_delegatePropsChanged(${this.constructor.delegateProps.join(", ")})`)}_ensureAttrsDelegated(){this.constructor.delegateAttrs.forEach(t=>{this._delegateAttribute(t,this[t])})}_ensurePropsDelegated(){this.constructor.delegateProps.forEach(t=>{this._delegateProperty(t,this[t])})}_delegateAttrsChanged(...t){this.constructor.delegateAttrs.forEach((r,o)=>{this._delegateAttribute(r,t[o])})}_delegatePropsChanged(...t){this.constructor.delegateProps.forEach((r,o)=>{this._delegateProperty(r,t[o])})}_delegateAttribute(t,r){this.stateTarget&&(t==="invalid"&&this._delegateAttribute("aria-invalid",r?"true":!1),typeof r=="boolean"?this.stateTarget.toggleAttribute(t,r):r?this.stateTarget.setAttribute(t,r):this.stateTarget.removeAttribute(t))}_delegateProperty(t,r){this.stateTarget&&(this.stateTarget[t]=r)}});/**
-@license
-Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/function isSlot(n){return n.localName==="slot"}let FlattenedNodesObserver=class{static getFlattenedNodes(n){const i=wrap$f(n);return isSlot(n)?(n=n,i.assignedNodes({flatten:!0})):Array.from(i.childNodes).map(t=>isSlot(t)?(t=t,wrap$f(t).assignedNodes({flatten:!0})):[t]).reduce((t,r)=>t.concat(r),[])}constructor(n,i){this._shadyChildrenObserver=null,this._nativeChildrenObserver=null,this._connected=!1,this._target=n,this.callback=i,this._effectiveNodes=[],this._observer=null,this._scheduled=!1,this._boundSchedule=()=>{this._schedule()},this.connect(),this._schedule()}connect(){isSlot(this._target)?this._listenSlots([this._target]):wrap$f(this._target).children&&(this._listenSlots(wrap$f(this._target).children),window.ShadyDOM?this._shadyChildrenObserver=window.ShadyDOM.observeChildren(this._target,n=>{this._processMutations(n)}):(this._nativeChildrenObserver=new MutationObserver(n=>{this._processMutations(n)}),this._nativeChildrenObserver.observe(this._target,{childList:!0}))),this._connected=!0}disconnect(){isSlot(this._target)?this._unlistenSlots([this._target]):wrap$f(this._target).children&&(this._unlistenSlots(wrap$f(this._target).children),window.ShadyDOM&&this._shadyChildrenObserver?(window.ShadyDOM.unobserveChildren(this._shadyChildrenObserver),this._shadyChildrenObserver=null):this._nativeChildrenObserver&&(this._nativeChildrenObserver.disconnect(),this._nativeChildrenObserver=null)),this._connected=!1}_schedule(){this._scheduled||(this._scheduled=!0,microTask$1.run(()=>this.flush()))}_processMutations(n){this._processSlotMutations(n),this.flush()}_processSlotMutations(n){if(n)for(let i=0;i<n.length;i++){let t=n[i];t.addedNodes&&this._listenSlots(t.addedNodes),t.removedNodes&&this._unlistenSlots(t.removedNodes)}}flush(){if(!this._connected)return!1;window.ShadyDOM&&ShadyDOM.flush(),this._nativeChildrenObserver?this._processSlotMutations(this._nativeChildrenObserver.takeRecords()):this._shadyChildrenObserver&&this._processSlotMutations(this._shadyChildrenObserver.takeRecords()),this._scheduled=!1;let n={target:this._target,addedNodes:[],removedNodes:[]},i=this.constructor.getFlattenedNodes(this._target),t=calculateSplices(i,this._effectiveNodes);for(let o=0,a;o<t.length&&(a=t[o]);o++)for(let s=0,l;s<a.removed.length&&(l=a.removed[s]);s++)n.removedNodes.push(l);for(let o=0,a;o<t.length&&(a=t[o]);o++)for(let s=a.index;s<a.index+a.addedCount;s++)n.addedNodes.push(i[s]);this._effectiveNodes=i;let r=!1;return(n.addedNodes.length||n.removedNodes.length)&&(r=!0,this.callback.call(this._target,n)),r}_listenSlots(n){for(let i=0;i<n.length;i++){let t=n[i];isSlot(t)&&t.addEventListener("slotchange",this._boundSchedule)}}_unlistenSlots(n){for(let i=0;i<n.length;i++){let t=n[i];isSlot(t)&&t.removeEventListener("slotchange",this._boundSchedule)}}};/**
  * @license
  * Copyright (c) 2021 - 2023 Vaadin Ltd.
  * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
@@ -2141,245 +2379,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
 
       <slot name="tooltip"></slot>
-    `}static get is(){return"vaadin-details"}static get properties(){return{summary:{type:String,observer:"_summaryChanged"}}}static get observers(){return["__updateAriaControls(focusElement, _contentElements)","__updateAriaExpanded(focusElement, opened)"]}static get delegateAttrs(){return["theme"]}static get delegateProps(){return["disabled","opened"]}constructor(){super(),this._summaryController=new SummaryController(this,"vaadin-details-summary"),this._summaryController.addEventListener("slot-content-changed",i=>{const{node:t}=i.target;this._setFocusElement(t),this.stateTarget=t,this._tooltipController.setTarget(t)}),this._tooltipController=new TooltipController(this),this._tooltipController.setPosition("bottom-start")}ready(){super.ready(),this.addController(this._summaryController),this.addController(this._tooltipController)}_setAriaDisabled(){}_summaryChanged(i){this._summaryController.setSummary(i)}__updateAriaControls(i,t){if(i&&t){const r=t[0];r&&r.id?i.setAttribute("aria-controls",r.id):i.removeAttribute("aria-controls")}}__updateAriaExpanded(i,t){i&&i.setAttribute("aria-expanded",t?"true":"false")}}customElements.define(Details.is,Details);registerStyles$1("vaadin-app-layout",css$e`
-    [part='navbar'],
-    [part='drawer'] {
-      background-color: var(--lumo-base-color);
-      background-clip: padding-box;
-    }
-
-    [part='navbar'] {
-      min-height: var(--lumo-size-xl);
-      border-bottom: 1px solid var(--lumo-contrast-10pct);
-    }
-
-    [part='navbar'][bottom] {
-      border-bottom: none;
-      border-top: 1px solid var(--lumo-contrast-10pct);
-    }
-
-    [part='drawer'] {
-      border-inline-end: 1px solid var(--lumo-contrast-10pct);
-    }
-
-    :host([overlay]) [part='drawer'] {
-      border-inline-end: none;
-      box-shadow: var(--lumo-box-shadow-s);
-    }
-
-    :host([primary-section='navbar']) [part='navbar'] {
-      border: none;
-      background-image: linear-gradient(var(--lumo-contrast-5pct), var(--lumo-contrast-5pct));
-    }
-
-    :host([primary-section='drawer']:not([overlay])) [part='drawer'] {
-      background-image: linear-gradient(var(--lumo-shade-5pct), var(--lumo-shade-5pct));
-    }
-
-    [part='backdrop'] {
-      background-color: var(--lumo-shade-20pct);
-      opacity: 1;
-    }
-
-    [part] ::slotted(h2),
-    [part] ::slotted(h3),
-    [part] ::slotted(h4) {
-      margin-top: var(--lumo-space-xs) !important;
-      margin-bottom: var(--lumo-space-xs) !important;
-    }
-  `,{moduleId:"lumo-app-layout"});const template$9=document.createElement("template");template$9.innerHTML=`
-  <style>
-    /* Use units so that the values can be used in calc() */
-    html {
-      --safe-area-inset-top: env(safe-area-inset-top, 0px);
-      --safe-area-inset-right: env(safe-area-inset-right, 0px);
-      --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
-      --safe-area-inset-left: env(safe-area-inset-left, 0px);
-    }
-  </style>
-`;document.head.appendChild(template$9.content);/**
- * @license
- * Copyright (c) 2018 - 2023 Vaadin Ltd.
- * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
- */function _detectIosNavbar(){if(isIOS){const n=window.innerHeight,t=window.innerWidth>n,r=document.documentElement.clientHeight;t&&r>n?document.documentElement.style.setProperty("--vaadin-viewport-offset-bottom",`${r-n}px`):document.documentElement.style.setProperty("--vaadin-viewport-offset-bottom","")}}_detectIosNavbar();window.addEventListener("resize",_detectIosNavbar);/**
- * @license
- * Copyright (c) 2018 - 2023 Vaadin Ltd.
- * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
- */class AppLayout extends ElementMixin(ThemableMixin(ControllerMixin(PolymerElement))){static get template(){return html`
-      <style>
-        :host {
-          display: block;
-          box-sizing: border-box;
-          height: 100%;
-          --vaadin-app-layout-transition: 200ms;
-          transition: padding var(--vaadin-app-layout-transition);
-          --vaadin-app-layout-touch-optimized: false;
-          --vaadin-app-layout-navbar-offset-top: var(--_vaadin-app-layout-navbar-offset-size);
-          --vaadin-app-layout-navbar-offset-bottom: var(--_vaadin-app-layout-navbar-offset-size-bottom);
-          padding-block: var(--vaadin-app-layout-navbar-offset-top) var(--vaadin-app-layout-navbar-offset-bottom);
-          padding-inline-start: var(--vaadin-app-layout-navbar-offset-left);
-        }
-
-        :host([hidden]),
-        [hidden] {
-          display: none !important;
-        }
-
-        :host([no-anim]) {
-          --vaadin-app-layout-transition: none !important;
-        }
-
-        :host([drawer-opened]) {
-          --vaadin-app-layout-drawer-offset-left: var(--_vaadin-app-layout-drawer-offset-size);
-        }
-
-        :host([overlay]) {
-          --vaadin-app-layout-drawer-offset-left: 0;
-          --vaadin-app-layout-navbar-offset-left: 0;
-        }
-
-        :host(:not([no-scroll])) [content] {
-          overflow: auto;
-        }
-
-        [content] {
-          height: 100%;
-        }
-
-        @media (pointer: coarse) and (max-width: 800px) and (min-height: 500px) {
-          :host {
-            --vaadin-app-layout-touch-optimized: true;
-          }
-        }
-
-        [part='navbar'] {
-          position: fixed;
-          display: flex;
-          align-items: center;
-          top: 0;
-          inset-inline: 0;
-          transition: inset-inline-start var(--vaadin-app-layout-transition);
-          padding-top: var(--safe-area-inset-top);
-          padding-left: var(--safe-area-inset-left);
-          padding-right: var(--safe-area-inset-right);
-          z-index: 1;
-        }
-
-        :host([primary-section='drawer'][drawer-opened]:not([overlay])) [part='navbar'] {
-          inset-inline-start: var(--vaadin-app-layout-drawer-offset-left, 0);
-        }
-
-        :host([primary-section='drawer']) [part='drawer'] {
-          top: 0;
-        }
-
-        [part='navbar'][bottom] {
-          top: auto;
-          bottom: 0;
-          padding-bottom: var(--safe-area-inset-bottom);
-        }
-
-        [part='drawer'] {
-          overflow: auto;
-          position: fixed;
-          top: var(--vaadin-app-layout-navbar-offset-top, 0);
-          bottom: var(--vaadin-app-layout-navbar-offset-bottom, var(--vaadin-viewport-offset-bottom, 0));
-          inset-inline: var(--vaadin-app-layout-navbar-offset-left, 0) auto;
-          transition: transform var(--vaadin-app-layout-transition), visibility var(--vaadin-app-layout-transition);
-          transform: translateX(-100%);
-          max-width: 90%;
-          width: 16em;
-          box-sizing: border-box;
-          padding: var(--safe-area-inset-top) 0 var(--safe-area-inset-bottom) var(--safe-area-inset-left);
-          outline: none;
-          /* The drawer should be inaccessible by the tabbing navigation when it is closed. */
-          visibility: hidden;
-          display: flex;
-          flex-direction: column;
-        }
-
-        :host([drawer-opened]) [part='drawer'] {
-          /* The drawer should be accessible by the tabbing navigation when it is opened. */
-          visibility: visible;
-          transform: translateX(0%);
-          touch-action: manipulation;
-        }
-
-        [part='backdrop'] {
-          background-color: #000;
-          opacity: 0.3;
-        }
-
-        :host(:not([drawer-opened])) [part='backdrop'] {
-          opacity: 0;
-        }
-
-        :host([overlay]) [part='backdrop'] {
-          position: fixed;
-          inset: 0;
-          pointer-events: none;
-          transition: opacity var(--vaadin-app-layout-transition);
-          -webkit-tap-highlight-color: transparent;
-        }
-
-        :host([overlay]) [part='drawer'] {
-          top: 0;
-          bottom: 0;
-        }
-
-        :host([overlay]) [part='drawer'],
-        :host([overlay]) [part='backdrop'] {
-          z-index: 2;
-        }
-
-        :host([drawer-opened][overlay]) [part='backdrop'] {
-          pointer-events: auto;
-          touch-action: manipulation;
-        }
-
-        :host([dir='rtl']) [part='drawer'] {
-          transform: translateX(100%);
-        }
-
-        :host([dir='rtl'][drawer-opened]) [part='drawer'] {
-          transform: translateX(0%);
-        }
-
-        :host([drawer-opened]:not([overlay])) {
-          padding-inline-start: var(--vaadin-app-layout-drawer-offset-left);
-        }
-
-        @media (max-width: 800px), (max-height: 600px) {
-          :host {
-            --vaadin-app-layout-drawer-overlay: true;
-          }
-
-          [part='drawer'] {
-            width: 20em;
-          }
-        }
-
-        /* If a vaadin-scroller is used in the drawer, allow it to take all remaining space and contain scrolling */
-        [part='drawer'] ::slotted(vaadin-scroller) {
-          flex: 1;
-          overscroll-behavior: contain;
-        }
-      </style>
-      <div part="navbar" id="navbarTop">
-        <slot name="navbar"></slot>
-      </div>
-      <div part="backdrop" on-click="_onBackdropClick" on-touchend="_onBackdropTouchend"></div>
-      <div part="drawer" id="drawer" on-keydown="__onDrawerKeyDown">
-        <slot name="drawer" id="drawerSlot"></slot>
-      </div>
-      <div content>
-        <slot></slot>
-      </div>
-      <div part="navbar" id="navbarBottom" bottom hidden>
-        <slot name="navbar-bottom"></slot>
-      </div>
-      <div hidden><slot id="touchSlot" name="navbar touch-optimized"></slot></div>
-    `}static get is(){return"vaadin-app-layout"}static get properties(){return{i18n:{type:Object,observer:"__i18nChanged",value:()=>({drawer:"Drawer"})},primarySection:{type:String,value:"navbar",notify:!0,reflectToAttribute:!0,observer:"__primarySectionChanged"},drawerOpened:{type:Boolean,notify:!0,value:!0,reflectToAttribute:!0,observer:"__drawerOpenedChanged"},overlay:{type:Boolean,notify:!0,readOnly:!0,value:!1,reflectToAttribute:!0},closeDrawerOn:{type:String,value:"vaadin-router-location-changed",observer:"_closeDrawerOnChanged"}}}static dispatchCloseOverlayDrawerEvent(){window.dispatchEvent(new CustomEvent("close-overlay-drawer"))}constructor(){super(),this.__boundResizeListener=this._resize.bind(this),this.__drawerToggleClickListener=this._drawerToggleClick.bind(this),this.__closeOverlayDrawerListener=this.__closeOverlayDrawer.bind(this),this.__trapFocusInDrawer=this.__trapFocusInDrawer.bind(this),this.__releaseFocusFromDrawer=this.__releaseFocusFromDrawer.bind(this),this.__focusTrapController=new FocusTrapController(this)}connectedCallback(){super.connectedCallback(),this._blockAnimationUntilAfterNextRender(),window.addEventListener("resize",this.__boundResizeListener),this.addEventListener("drawer-toggle-click",this.__drawerToggleClickListener),beforeNextRender(this,this._afterFirstRender),this._updateTouchOptimizedMode();const i=this.$.navbarTop.firstElementChild;this._navbarChildObserver=new FlattenedNodesObserver(i,()=>{this._updateTouchOptimizedMode()}),this._touchChildObserver=new FlattenedNodesObserver(this.$.touchSlot,()=>{this._updateTouchOptimizedMode()}),this._drawerChildObserver=new FlattenedNodesObserver(this.$.drawerSlot,()=>{this._updateDrawerSize()}),this._updateDrawerSize(),this._updateOverlayMode(),this._navbarSizeObserver=new ResizeObserver(()=>{requestAnimationFrame(()=>{this._blockAnimationUntilAfterNextRender(),this._updateOffsetSize()})}),this._navbarSizeObserver.observe(this.$.navbarTop),this._navbarSizeObserver.observe(this.$.navbarBottom),window.addEventListener("close-overlay-drawer",this.__closeOverlayDrawerListener)}ready(){super.ready(),this.addController(this.__focusTrapController),this.__setAriaExpanded()}disconnectedCallback(){super.disconnectedCallback(),this._navbarChildObserver&&this._navbarChildObserver.disconnect(),this._drawerChildObserver&&this._drawerChildObserver.disconnect(),this._touchChildObserver&&this._touchChildObserver.disconnect(),window.removeEventListener("resize",this.__boundResizeListener),this.removeEventListener("drawer-toggle-click",this.__drawerToggleClickListener),window.removeEventListener("close-overlay-drawer",this.__drawerToggleClickListener)}__primarySectionChanged(i){["navbar","drawer"].includes(i)||this.set("primarySection","navbar")}__drawerOpenedChanged(i,t){this.overlay&&(i?this.__trapFocusInDrawer():t&&this.__releaseFocusFromDrawer()),this.__setAriaExpanded()}__i18nChanged(){this.__updateDrawerAriaAttributes()}_afterFirstRender(){this._blockAnimationUntilAfterNextRender(),this._updateOffsetSize()}_drawerToggleClick(i){i.stopPropagation(),this.drawerOpened=!this.drawerOpened}__closeOverlayDrawer(){this.overlay&&(this.drawerOpened=!1)}__setAriaExpanded(){const i=this.querySelector("vaadin-drawer-toggle");i&&i.setAttribute("aria-expanded",this.drawerOpened)}_updateDrawerSize(){const i=this.querySelectorAll("[slot=drawer]").length,t=this.$.drawer;i===0?t.setAttribute("hidden",""):t.removeAttribute("hidden"),this._updateOffsetSize()}_resize(){this._blockAnimationUntilAfterNextRender(),this._updateTouchOptimizedMode(),this._updateOverlayMode()}_updateOffsetSize(){const t=this.$.navbarTop.getBoundingClientRect(),o=this.$.navbarBottom.getBoundingClientRect();this.style.setProperty("--_vaadin-app-layout-navbar-offset-size",`${t.height}px`),this.style.setProperty("--_vaadin-app-layout-navbar-offset-size-bottom",`${o.height}px`);const s=this.$.drawer.getBoundingClientRect();this.style.setProperty("--_vaadin-app-layout-drawer-offset-size",`${s.width}px`)}_updateOverlayMode(){const i=this._getCustomPropertyValue("--vaadin-app-layout-drawer-overlay")==="true";!this.overlay&&i&&(this._drawerStateSaved=this.drawerOpened,this.drawerOpened=!1),this._setOverlay(i),!this.overlay&&this._drawerStateSaved&&(this.drawerOpened=this._drawerStateSaved,this._drawerStateSaved=null),this.__updateDrawerAriaAttributes()}__updateDrawerAriaAttributes(){const i=this.$.drawer;this.overlay?(i.setAttribute("role","dialog"),i.setAttribute("aria-modal","true"),i.setAttribute("aria-label",this.i18n.drawer)):(i.removeAttribute("role"),i.removeAttribute("aria-modal"),i.removeAttribute("aria-label"))}__drawerTransitionComplete(){return new Promise(i=>{if(this._getCustomPropertyValue("--vaadin-app-layout-transition")==="none"){i();return}this.$.drawer.addEventListener("transitionend",i,{once:!0})})}async __trapFocusInDrawer(){await this.__drawerTransitionComplete(),this.drawerOpened&&(this.$.drawer.setAttribute("tabindex","0"),this.__focusTrapController.trapFocus(this.$.drawer))}async __releaseFocusFromDrawer(){if(await this.__drawerTransitionComplete(),this.drawerOpened)return;this.__focusTrapController.releaseFocus(),this.$.drawer.removeAttribute("tabindex");const i=this.querySelector("vaadin-drawer-toggle");i&&(i.focus(),i.setAttribute("focus-ring","focus"))}__onDrawerKeyDown(i){i.key==="Escape"&&this.overlay&&(this.drawerOpened=!1)}_closeDrawerOnChanged(i,t){t&&window.removeEventListener(t,this.__closeOverlayDrawerListener),i&&window.addEventListener(i,this.__closeOverlayDrawerListener)}_onBackdropClick(){this._close()}_onBackdropTouchend(i){i.preventDefault(),this._close()}_close(){this.drawerOpened=!1}_getCustomPropertyValue(i){return(getComputedStyle(this).getPropertyValue(i)||"").trim().toLowerCase()}_updateTouchOptimizedMode(){const i=this._getCustomPropertyValue("--vaadin-app-layout-touch-optimized")==="true",t=this.querySelectorAll('[slot*="navbar"]');t.length>0&&Array.from(t).forEach(r=>{r.getAttribute("slot").indexOf("touch-optimized")>-1&&(r.__touchOptimized=!0),i&&r.__touchOptimized?r.setAttribute("slot","navbar-bottom"):r.setAttribute("slot","navbar")}),this.$.navbarTop.querySelector("[name=navbar]").assignedNodes().length===0?this.$.navbarTop.setAttribute("hidden",""):this.$.navbarTop.removeAttribute("hidden"),this.$.navbarBottom.querySelector("[name=navbar-bottom]").assignedNodes().length===0?this.$.navbarBottom.setAttribute("hidden",""):this.$.navbarBottom.removeAttribute("hidden"),this._updateOffsetSize()}_blockAnimationUntilAfterNextRender(){this.setAttribute("no-anim",""),afterNextRender(this,()=>{this.removeAttribute("no-anim")})}}customElements.define(AppLayout.is,AppLayout);const button=css$e`
+    `}static get is(){return"vaadin-details"}static get properties(){return{summary:{type:String,observer:"_summaryChanged"}}}static get observers(){return["__updateAriaControls(focusElement, _contentElements)","__updateAriaExpanded(focusElement, opened)"]}static get delegateAttrs(){return["theme"]}static get delegateProps(){return["disabled","opened"]}constructor(){super(),this._summaryController=new SummaryController(this,"vaadin-details-summary"),this._summaryController.addEventListener("slot-content-changed",i=>{const{node:t}=i.target;this._setFocusElement(t),this.stateTarget=t,this._tooltipController.setTarget(t)}),this._tooltipController=new TooltipController(this),this._tooltipController.setPosition("bottom-start")}ready(){super.ready(),this.addController(this._summaryController),this.addController(this._tooltipController)}_setAriaDisabled(){}_summaryChanged(i){this._summaryController.setSummary(i)}__updateAriaControls(i,t){if(i&&t){const r=t[0];r&&r.id?i.setAttribute("aria-controls",r.id):i.removeAttribute("aria-controls")}}__updateAriaExpanded(i,t){i&&i.setAttribute("aria-expanded",t?"true":"false")}}customElements.define(Details.is,Details);const button=css$e`
   :host {
     /* Sizing */
     --lumo-button-size: var(--lumo-size-m);
