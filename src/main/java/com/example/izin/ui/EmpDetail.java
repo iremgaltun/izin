@@ -36,6 +36,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -157,7 +158,7 @@ public class EmpDetail extends AppLayout implements BeforeEnterObserver {
             leaveGrid.addColumn(Leave::getLeaveEnd).setHeader("İzin Bitiş Tarihi").setAutoWidth(true);
 
             // Yeni sütun: Toplam izin gününü hesapla
-            leaveGrid.addColumn(leave -> ChronoUnit.DAYS.between(leave.getLeaveStart(), leave.getLeaveEnd()))
+            leaveGrid.addColumn(leave -> ChronoUnit.DAYS.between(leave.getLeaveStart(), leave.getLeaveEnd())+1)
                     .setHeader("Toplam Gün")
                     .setAutoWidth(true);
             leaveGrid.addComponentColumn(leave -> {
@@ -234,7 +235,16 @@ public class EmpDetail extends AppLayout implements BeforeEnterObserver {
         TextField leaveReason = new TextField("İzin Nedeni");
         TextField leaveApprover = new TextField("İzin Veren");
         DatePicker leaveStart = new DatePicker("Başlangıç Tarihi");
+        leaveStart.setMin(LocalDate.now());
+
         DatePicker leaveEnd = new DatePicker("Bitiş Tarihi");
+        leaveStart.addValueChangeListener(event -> {
+            LocalDate startDate = event.getValue();
+            if (startDate != null) {
+                leaveEnd.setMin(startDate.plusDays(1)); // Başlangıç tarihinden bir gün sonrasını min olarak ayarla
+            }
+        });
+
 
         // Çalışan ID'sini saklamak için dizi (final olmadığı için array kullanıyoruz)
         Long[] employeeIdHolder = new Long[1];
