@@ -2,7 +2,7 @@ package com.example.izin.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.*;
+import lombok.Data;
 import java.util.List;
 import java.time.LocalDate;
 
@@ -10,9 +10,10 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "employees")
 public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotBlank(message = "Name cannot be blank")
     private String name;
@@ -21,7 +22,7 @@ public class Employee {
     private String lastname;
 
     @NotNull(message = "TCKN cannot be null")
-    @Size(min = 11, max = 11, message = "TCKN must be 11 digits")
+    @Pattern(regexp = "\\d{11}", message = "TCKN must be exactly 11 digits") // rakam kontrl
     private String tckn;
 
     @Past(message = "Birth date must be in the past")
@@ -31,15 +32,13 @@ public class Employee {
     private LocalDate dateOfEmployment;
 
     @NotNull(message = "Phone number cannot be null")
+    @Pattern(regexp = "\\d{10,15}", message = "Phone number must be between 10 and 15 digits")
     @Column(name = "phone_number", nullable = false, length = 15)
     private String phoneNumber;
 
     @Column(name = "position")
     private String position;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.MERGE, orphanRemoval = true) // İzinle silinmicek çalışan silise bile mergle
     private List<Leave> leaves;
-
-
 }
-

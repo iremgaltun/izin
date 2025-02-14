@@ -198,19 +198,20 @@ public class MainView extends AppLayout {
         title.addClassName("dialog-title");
         dialog.add(title);
 
+        TextField tcknField = new TextField("Kimlik Numarası", isUpdate ? employee.getTckn() : "");
         TextField nameField = new TextField("Ad", isUpdate ? employee.getName() : "");
         TextField lastnameField = new TextField("Soyad", isUpdate ? employee.getLastname() : "");
-        TextField tcknField = new TextField("Kimlik Numarası", isUpdate ? employee.getTckn() : "");
+        TextField PositionField = new TextField("Pozisyon", isUpdate ? employee.getPosition() : "");
         TextField phoneField = new TextField("Telefon Numarası", isUpdate ? employee.getPhoneNumber() : "");
         DatePicker birthDateField = new DatePicker("Doğum Tarihi", isUpdate ? employee.getBirthDate() : null);
         birthDateField.addClassName("custom-date-picker");
-
         DatePicker hireDateField = new DatePicker("İşe Alım Tarihi", isUpdate ? employee.getDateOfEmployment() : null);
         hireDateField.addClassName("custom-date-picker");
 
+        tcknField.setWidth("100%");
         nameField.setWidth("100%");
         lastnameField.setWidth("100%");
-        tcknField.setWidth("100%");
+        PositionField.setWidth("100%");
         phoneField.setWidth("100%");
         birthDateField.setWidth("100%");
         hireDateField.setWidth("100%");
@@ -240,10 +241,10 @@ public class MainView extends AppLayout {
                 }
 
                 Employee currentEmployee = isUpdate ? employee : new Employee();
-
+                currentEmployee.setTckn(tcknField.getValue());
                 currentEmployee.setName(nameField.getValue());
                 currentEmployee.setLastname(lastnameField.getValue());
-                currentEmployee.setTckn(tcknField.getValue());
+                currentEmployee.setPosition(PositionField.getValue());
                 currentEmployee.setPhoneNumber(phoneField.getValue());
                 currentEmployee.setBirthDate(birthDateField.getValue() != null ? birthDateField.getValue() : LocalDate.now().minusYears(25));
                 currentEmployee.setDateOfEmployment(hireDateField.getValue() != null ? hireDateField.getValue() : LocalDate.now());
@@ -282,7 +283,7 @@ public class MainView extends AppLayout {
 
         HorizontalLayout dialogButtons = new HorizontalLayout(saveButton, cancelButton);
         VerticalLayout dialogLayout = new VerticalLayout(
-                nameField, lastnameField, tcknField, phoneField, birthDateField, hireDateField, upload, uploadInfo, dialogButtons
+                tcknField, nameField, lastnameField,PositionField, phoneField, birthDateField, hireDateField, upload, uploadInfo, dialogButtons
         );
 
         dialogLayout.setWidthFull();
@@ -302,14 +303,21 @@ public class MainView extends AppLayout {
             // Çalışanı veritabanından siliyoruz
             employeeService.delete(selectedEmployee);
 
-            // Fotoğrafın kaydedildiği dizini belirliyoruz
-            Path photoPath = Paths.get("C:\\Users\\DELL\\Desktop\\izin\\src\\main\\Static", selectedEmployee.getTckn() + ".jpg");
+            // Fotoğrafın kaydedildiği doğru dizini belirliyoruz
+            Path photoPath = Paths.get("C:\\Users\\DELL\\Desktop\\izin\\src\\main\\resources\\static\\images\\profile-photos", selectedEmployee.getTckn() + ".jpg");
+
+            System.out.println("Dosya yolu: " + photoPath.toString()); // Dosya yolunu kontrol et
+
             if (Files.exists(photoPath)) {
                 try {
-                    Files.delete(photoPath); // Fotoğraf dosyasını sil
-                    Notification.show("Çalışan ve fotoğrafı başarıyla silindi!", 3000, Notification.Position.MIDDLE);
+                    if (Files.isWritable(photoPath)) { // Dosyanın yazılabilir olup olmadığını kontrol et
+                        Files.delete(photoPath); // Fotoğraf dosyasını sil
+                        Notification.show("Çalışan ve fotoğrafı başarıyla silindi!", 3000, Notification.Position.MIDDLE);
+                    } else {
+                        Notification.show("Fotoğraf dosyasına yazma izniniz yok.", 3000, Notification.Position.MIDDLE);
+                    }
                 } catch (IOException e) {
-                    Notification.show("Çalışan silindi ancak fotoğraf silinemedi: " + e.getMessage(), 3000, Notification.Position.MIDDLE);
+                    Notification.show("Fotoğraf silinemedi: " + e.getMessage(), 3000, Notification.Position.MIDDLE);
                 }
             } else {
                 Notification.show("Çalışan silindi ancak fotoğraf bulunamadı.", 3000, Notification.Position.MIDDLE);
@@ -320,6 +328,7 @@ public class MainView extends AppLayout {
             Notification.show("Hata: " + e.getMessage(), 3000, Notification.Position.MIDDLE);
         }
     }
+
     private void updateGrid() {
         List<Employee> employees = employeeService.findAll();
         System.out.println("updateGrid Çalıştı, Çalışan Sayısı: " + employees.size());

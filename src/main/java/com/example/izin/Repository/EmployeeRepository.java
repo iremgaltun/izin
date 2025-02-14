@@ -15,9 +15,10 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     Optional<Employee> findByTckn(String tckn);
 
-    @Query("SELECT new com.example.izin.Model.EmpLeaveDTO(e.name, e.lastname, l.leaveReason, l.leaveApprover, l.leaveStart, l.leaveEnd) " +
+    @Query("SELECT new com.example.izin.Model.EmpLeaveDTO(e.id, e.name, e.lastname, l.leaveReason, l.leaveApprover, l.leaveStart, l.leaveEnd, e.tckn) " +
             "FROM Employee e JOIN e.leaves l " +
             "ORDER BY e.name, l.leaveStart")
     List<EmpLeaveDTO> getEmployeeLeaveDetails();
+
 
 }

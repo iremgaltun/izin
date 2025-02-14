@@ -13,8 +13,6 @@ public interface EmployeeService {
 
     public List<EmpLeaveDTO> getAllEmployeeLeaveDetails();
 
-    // Çalışanı kaydet (ekle veya güncelle)
-    Employee save(Employee employee);
 
     // Tüm çalışanları getir
     List<Employee> findAll();
@@ -32,4 +30,6 @@ public interface EmployeeService {
     void delete(Employee employee);
 
     boolean isEmployeeOnLeave(Long id);
+
+     Optional<Employee> findByTckn(String tckn);
 }

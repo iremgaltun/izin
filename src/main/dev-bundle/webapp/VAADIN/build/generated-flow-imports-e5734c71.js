@@ -1,4 +1,4 @@
-import{C as CSSResult,c as css$e,u as unsafeCSS,D as Directive,n as nothing,P as PartType,a as noChange,d as directive,r as render$1,s as svg$6,h as html$1,_ as __vitePreload,L as LitElement}from"./indexhtml-3b5c190d.js";const{toString:toString$2}=Object.prototype;function isRegexp(n){return toString$2.call(n)==="[object RegExp]"}function stripCssComments(n,{preserve:i=!0,whitespace:t=!0,all:r}={}){if(r)throw new Error("The `all` option is no longer supported. Use the `preserve` option instead.");let o=i,a;typeof i=="function"?(o=!1,a=i):isRegexp(i)&&(o=!1,a=d=>i.test(d));let s=!1,l="",h="",c="";for(let d=0;d<n.length;d++){if(l=n[d],n[d-1]!=="\\"&&(l==='"'||l==="'")&&(s===l?s=!1:s||(s=l)),!s&&l==="/"&&n[d+1]==="*"){const u=n[d+2]==="!";let p=d+2;for(;p<n.length;p++){if(n[p]==="*"&&n[p+1]==="/"){o&&u||a&&a(h)?c+=`/*${h}*/`:t||(n[p+2]===`
+import{C as CSSResult,c as css$e,u as unsafeCSS,D as Directive,n as nothing,P as PartType,a as noChange,d as directive,r as render$1,s as svg$6,h as html$1,_ as __vitePreload,L as LitElement}from"./indexhtml-50c67d93.js";const{toString:toString$2}=Object.prototype;function isRegexp(n){return toString$2.call(n)==="[object RegExp]"}function stripCssComments(n,{preserve:i=!0,whitespace:t=!0,all:r}={}){if(r)throw new Error("The `all` option is no longer supported. Use the `preserve` option instead.");let o=i,a;typeof i=="function"?(o=!1,a=i):isRegexp(i)&&(o=!1,a=d=>i.test(d));let s=!1,l="",h="",c="";for(let d=0;d<n.length;d++){if(l=n[d],n[d-1]!=="\\"&&(l==='"'||l==="'")&&(s===l?s=!1:s||(s=l)),!s&&l==="/"&&n[d+1]==="*"){const u=n[d+2]==="!";let p=d+2;for(;p<n.length;p++){if(n[p]==="*"&&n[p+1]==="/"){o&&u||a&&a(h)?c+=`/*${h}*/`:t||(n[p+2]===`
 `?p++:n[p+2]+n[p+3]===`\r
 `&&(p+=2)),h="";break}h+=n[p]}d=p+1;continue}c+=l}return c}const polyfilledSafari=CSSStyleSheet.toString().includes("document.createElement"),createLinkReferences=(n,i)=>{const t=/(?:@media\s(.+?))?(?:\s{)?\@import\s*(?:url\(\s*['"]?(.+?)['"]?\s*\)|(["'])((?:\\.|[^\\])*?)\3)([^;]*);(?:})?/g;/\/\*(.|[\r\n])*?\*\//gm.exec(n)!=null&&(n=stripCssComments(n));for(var r,o=n;(r=t.exec(n))!==null;){o=o.replace(r[0],"");const a=document.createElement("link");a.rel="stylesheet",a.href=r[2]||r[4];const s=r[1]||r[5];s&&(a.media=s),i===document?document.head.appendChild(a):i.appendChild(a)}return o},addAdoptedStyleSafariPolyfill=(n,i,t)=>(t?i.adoptedStyleSheets=[n,...i.adoptedStyleSheets]:i.adoptedStyleSheets=[...i.adoptedStyleSheets,n],()=>{i.adoptedStyleSheets=i.adoptedStyleSheets.filter(r=>r!==n)}),addAdoptedStyle=(n,i,t)=>{const r=new CSSStyleSheet;return r.replaceSync(n),polyfilledSafari?addAdoptedStyleSafariPolyfill(r,i,t):(t?i.adoptedStyleSheets.splice(0,0,r):i.adoptedStyleSheets.push(r),()=>{i.adoptedStyleSheets.splice(i.adoptedStyleSheets.indexOf(r),1)})},addStyleTag=(n,i)=>{const t=document.createElement("style");t.type="text/css",t.textContent=n;let r;if(i){const a=Array.from(document.head.childNodes).filter(s=>s.nodeType===Node.COMMENT_NODE).find(s=>s.data.trim()===i);a&&(r=a)}return document.head.insertBefore(t,r),()=>{t.remove()}},injectGlobalCss=(n,i,t,r)=>{if(t===document){const a=getHash(n);if(window.Vaadin.theme.injectedGlobalCss.indexOf(a)!==-1)return;window.Vaadin.theme.injectedGlobalCss.push(a)}const o=createLinkReferences(n,t);return t===document?addStyleTag(o,i):addAdoptedStyle(o,t,r)};window.Vaadin=window.Vaadin||{};window.Vaadin.theme=window.Vaadin.theme||{};window.Vaadin.theme.injectedGlobalCss=[];function hashFnv32a(n){let i,t,r=2166136261;for(i=0,t=n.length;i<t;i++)r^=n.charCodeAt(i),r+=(r<<1)+(r<<4)+(r<<7)+(r<<8)+(r<<24);return("0000000"+(r>>>0).toString(16)).substr(-8)}function getHash(n){let i=hashFnv32a(n);return i+hashFnv32a(i+n)}/**
  * @license
@@ -12,7 +12,7 @@ import{C as CSSResult,c as css$e,u as unsafeCSS,D as Directive,n as nothing,P as
       was finalized before a style module was registered.
       Make sure to add component specific style modules before
       importing the corresponding custom element.`),i=flattenStyles(i),window.Vaadin&&window.Vaadin.styleModules?window.Vaadin.styleModules.registerStyles(n,i,t):themeRegistry.push({themeFor:n,styles:i,include:t.include,moduleId:t.moduleId})}function getAllThemes$1(){return window.Vaadin&&window.Vaadin.styleModules?window.Vaadin.styleModules.getAllThemes():themeRegistry}function matchesThemeFor(n,i){return(n||"").split(" ").some(t=>new RegExp(`^${t.split("*").join(".*")}$`,"u").test(i))}function getIncludePriority(n=""){let i=0;return n.startsWith("lumo-")||n.startsWith("material-")?i=1:n.startsWith("vaadin-")&&(i=2),i}function getIncludedStyles(n){const i=[];return n.include&&[].concat(n.include).forEach(t=>{const r=getAllThemes$1().find(o=>o.moduleId===t);r?i.push(...getIncludedStyles(r),...r.styles):console.warn(`Included moduleId ${t} not found in style registry`)},n.styles),i}function addStylesToTemplate(n,i){const t=document.createElement("style");t.innerHTML=n.map(r=>r.cssText).join(`
-`),i.content.appendChild(t)}function getThemes(n){const i=`${n}-default-theme`,t=getAllThemes$1().filter(r=>r.moduleId!==i&&matchesThemeFor(r.themeFor,n)).map(r=>({...r,styles:[...getIncludedStyles(r),...r.styles],includePriority:getIncludePriority(r.moduleId)})).sort((r,o)=>o.includePriority-r.includePriority);return t.length>0?t:getAllThemes$1().filter(r=>r.moduleId===i)}const ThemableMixin=n=>class extends ThemePropertyMixin(n){static finalize(){if(super.finalize(),this.elementStyles)return;const t=this.prototype._template;!t||classHasThemes(this)||addStylesToTemplate(this.getStylesForThis(),t)}static finalizeStyles(t){const r=this.getStylesForThis();return t?[...super.finalizeStyles(t),...r]:r}static getStylesForThis(){const t=Object.getPrototypeOf(this.prototype),r=(t?t.constructor.__themes:[])||[];this.__themes=[...r,...getThemes(this.is)];const o=this.__themes.flatMap(a=>a.styles);return o.filter((a,s)=>s===o.lastIndexOf(a))}},$cssFromFile_0=css$e`.custom-dialog{width:60%!important;padding:20px;margin:0 auto}.dialog-title{display:flex;justify-content:center;align-items:center;text-align:center;font-size:30px;font-weight:700;margin-bottom:10px}.custom-dialog input,.custom-dialog .vaadin-date-picker{width:100%!important;margin-bottom:10px}.custom-search-field{width:100%;max-width:none}vaadin-date-picker::part(input-field){font-size:var(--lumo-font-size-s);text-align:right}vaadin-date-picker[theme~=helper-above-field]::part(helper-text){position:absolute;top:-1.5em;left:0}.employee-details-view{display:flex;flex-direction:column;align-items:stretch}.employee-info-container,.leave-grid-container{width:100%;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:16px}.employee-info-layout{display:flex;align-items:center;border-radius:3%}.employee-photo{margin-left:8px;max-width:150px;max-height:150px;margin-right:16px;border-radius:50%;object-fit:cover}.employee-info-details{flex-grow:1}.leave-grid{width:100%;margin-top:16px}.name{font-size:24px;font-weight:700;color:#2e3b55;margin-bottom:16px;text-align:center;position:relative;margin-left:3px;margin-top:5px}.employee-details{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;justify-items:start;align-items:center;margin-left:10px}.tckn,.birthDate,.phone,.status,.employmentDate{font-size:16px;color:#555}.employee-info-grid{display:grid;grid-template-columns:1fr 1fr;row-gap:15px;justify-items:start;align-items:center;column-gap:50px}.edit-icon{cursor:pointer;position:absolute;top:2px;right:10px;z-index:1}.icon-container{position:relative;width:20px;margin-bottom:200px}.custom-avatar{width:150px;height:150px;border-radius:50%;object-fit:cover;margin-left:8px;margin-right:16px}.header{margin:0;font-size:1.5em}
+`),i.content.appendChild(t)}function getThemes(n){const i=`${n}-default-theme`,t=getAllThemes$1().filter(r=>r.moduleId!==i&&matchesThemeFor(r.themeFor,n)).map(r=>({...r,styles:[...getIncludedStyles(r),...r.styles],includePriority:getIncludePriority(r.moduleId)})).sort((r,o)=>o.includePriority-r.includePriority);return t.length>0?t:getAllThemes$1().filter(r=>r.moduleId===i)}const ThemableMixin=n=>class extends ThemePropertyMixin(n){static finalize(){if(super.finalize(),this.elementStyles)return;const t=this.prototype._template;!t||classHasThemes(this)||addStylesToTemplate(this.getStylesForThis(),t)}static finalizeStyles(t){const r=this.getStylesForThis();return t?[...super.finalizeStyles(t),...r]:r}static getStylesForThis(){const t=Object.getPrototypeOf(this.prototype),r=(t?t.constructor.__themes:[])||[];this.__themes=[...r,...getThemes(this.is)];const o=this.__themes.flatMap(a=>a.styles);return o.filter((a,s)=>s===o.lastIndexOf(a))}},$cssFromFile_0=css$e`.custom-dialog{width:60%!important;padding:20px;margin:0 auto}.dialog-title{display:flex;justify-content:center;align-items:center;text-align:center;font-size:30px;font-weight:700;margin-bottom:10px}.custom-dialog input,.custom-dialog .vaadin-date-picker{width:100%!important;margin-bottom:10px}.custom-search-field{width:100%;max-width:none}vaadin-date-picker::part(input-field){font-size:var(--lumo-font-size-s);text-align:right}vaadin-date-picker[theme~=helper-above-field]::part(helper-text){position:absolute;top:-1.5em;left:0}.employee-details-view{display:flex;flex-direction:column;align-items:stretch}.employee-info-container,.leave-grid-container{width:100%;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:16px}.employee-info-layout{display:flex;align-items:center;border-radius:3%}.employee-photo{margin-left:8px;max-width:150px;max-height:150px;margin-right:16px;border-radius:50%;object-fit:cover}.employee-info-details{flex-grow:1}.leave-grid{width:100%;margin-top:16px}.name{font-size:24px;font-weight:700;color:#2e3b55;margin-bottom:16px;text-align:center;position:relative;margin-left:3px;margin-top:5px}.employee-details{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;justify-items:start;align-items:center;margin-left:10px}.tckn,.birthDate,.phone,.status,.employmentDate{font-size:16px;color:#555}.employee-info-grid{display:grid;grid-template-columns:1fr 1fr;row-gap:15px;justify-items:start;align-items:center;column-gap:50px}.edit-icon{cursor:pointer;position:absolute;top:2px;right:10px;z-index:1}.icon-container{position:relative;width:20px;margin-bottom:200px}.custom-avatar{width:150px;height:150px;border-radius:50%;object-fit:cover;margin-left:8px;margin-right:16px}.header{margin:0;font-size:1.5em}.leave-progress-layout{display:flex;flex-direction:column;align-items:flex-start;width:100%}.leave-status-label{font-weight:700;left:100%;margin-bottom:4px}.leave-grid .vaadin-button{font-size:.8em;opacity:.6;background-color:transparent;border:none}.leave-grid .vaadin-button:hover{opacity:1}
 `;/**
 @license
 Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
@@ -1158,67 +1158,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <g id="lumo:unordered-list"><path d="M146 325c-42 0-67-26-67-63 0-37 25-63 67-63 42 0 67 26 67 63 0 37-25 63-67 63z m0 250c-42 0-67-26-67-63 0-37 25-63 67-63 42 0 67 26 67 63 0 37-25 63-67 63z m0 250c-42 0-67-26-67-63 0-37 25-63 67-63 42 0 67 26 67 63 0 37-25 63-67 63zM333 258c0-18 15-33 34-33h516c18 0 33 15 34 33 0 18-15 33-34 34H367c-18 0-33-15-34-34z m0 250c0-18 15-33 34-33h516c18 0 33 15 34 33s-15 33-34 34H367c-18 0-33-15-34-34z m0 250c0-18 15-33 34-33h516c18 0 33 15 34 33s-15 33-34 34H367c-18 0-33-15-34-34z"></path></g>
 <g id="lumo:upload"><path d="M454 271V604c0 21-17 38-37 38s-38-17-38-38V271L254 382c-15 14-39 12-53-3-14-15-12-39 3-53L391 160c14-13 36-13 51-1 0 0 0 0 0 1l187 166c15 14 17 37 3 53-14 15-37 17-53 3L454 271zM675 704c0-21 17-38 37-37 21 0 38 17 38 37v92c0 21-17 38-38 37H121c-21 0-38-17-38-37v-92c0-21 17-38 38-37s38 17 37 37v54h517v-54z"></path></g>
 <g id="lumo:user"><path d="M500 500c-69 0-125-56-125-125s56-125 125-125 125 56 125 125-56 125-125 125z m-292 292c0-115 131-208 292-209s292 93 292 209H208z"></path></g>
-</defs></svg>`;Iconset.register("lumo",1e3,template$a);const verticalLayout=css$e`
-  :host([theme~='margin']) {
-    margin: var(--lumo-space-m);
-  }
-
-  :host([theme~='padding']) {
-    padding: var(--lumo-space-m);
-  }
-
-  :host([theme~='spacing-xs']) {
-    gap: var(--lumo-space-xs);
-  }
-
-  :host([theme~='spacing-s']) {
-    gap: var(--lumo-space-s);
-  }
-
-  :host([theme~='spacing']) {
-    gap: var(--lumo-space-m);
-  }
-
-  :host([theme~='spacing-l']) {
-    gap: var(--lumo-space-l);
-  }
-
-  :host([theme~='spacing-xl']) {
-    gap: var(--lumo-space-xl);
-  }
-`;registerStyles$1("vaadin-vertical-layout",verticalLayout,{moduleId:"lumo-vertical-layout"});/**
- * @license
- * Copyright (c) 2017 - 2023 Vaadin Ltd.
- * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
- */class VerticalLayout extends ElementMixin(ThemableMixin(PolymerElement)){static get template(){return html`
-      <style>
-        :host {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          box-sizing: border-box;
-        }
-
-        :host([hidden]) {
-          display: none !important;
-        }
-
-        /* Theme variations */
-        :host([theme~='margin']) {
-          margin: 1em;
-        }
-
-        :host([theme~='padding']) {
-          padding: 1em;
-        }
-
-        :host([theme~='spacing']) {
-          gap: 1em;
-        }
-      </style>
-
-      <slot></slot>
-    `}static get is(){return"vaadin-vertical-layout"}}customElements.define(VerticalLayout.is,VerticalLayout);registerStyles$1("vaadin-app-layout",css$e`
+</defs></svg>`;Iconset.register("lumo",1e3,template$a);registerStyles$1("vaadin-app-layout",css$e`
     [part='navbar'],
     [part='drawer'] {
       background-color: var(--lumo-base-color);
@@ -13015,7 +12955,67 @@ northing meters`+n;var p=u/2,f=0,v=0,m,g,_,y,b;return p>0&&(m=1e5/Math.pow(10,p)
       </style>
 
       <slot></slot>
-    `}static get is(){return"vaadin-scroller"}static get properties(){return{scrollDirection:{type:String,reflectToAttribute:!0},tabindex:{type:Number,value:0,reflectToAttribute:!0}}}ready(){super.ready(),this.__overflowController=new OverflowController(this),this.addController(this.__overflowController)}_shouldSetFocus(i){return i.target===this}}customElements.define(Scroller.is,Scroller);registerStyles$1("vaadin-progress-bar",css$e`
+    `}static get is(){return"vaadin-scroller"}static get properties(){return{scrollDirection:{type:String,reflectToAttribute:!0},tabindex:{type:Number,value:0,reflectToAttribute:!0}}}ready(){super.ready(),this.__overflowController=new OverflowController(this),this.addController(this.__overflowController)}_shouldSetFocus(i){return i.target===this}}customElements.define(Scroller.is,Scroller);const verticalLayout=css$e`
+  :host([theme~='margin']) {
+    margin: var(--lumo-space-m);
+  }
+
+  :host([theme~='padding']) {
+    padding: var(--lumo-space-m);
+  }
+
+  :host([theme~='spacing-xs']) {
+    gap: var(--lumo-space-xs);
+  }
+
+  :host([theme~='spacing-s']) {
+    gap: var(--lumo-space-s);
+  }
+
+  :host([theme~='spacing']) {
+    gap: var(--lumo-space-m);
+  }
+
+  :host([theme~='spacing-l']) {
+    gap: var(--lumo-space-l);
+  }
+
+  :host([theme~='spacing-xl']) {
+    gap: var(--lumo-space-xl);
+  }
+`;registerStyles$1("vaadin-vertical-layout",verticalLayout,{moduleId:"lumo-vertical-layout"});/**
+ * @license
+ * Copyright (c) 2017 - 2023 Vaadin Ltd.
+ * This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
+ */class VerticalLayout extends ElementMixin(ThemableMixin(PolymerElement)){static get template(){return html`
+      <style>
+        :host {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          box-sizing: border-box;
+        }
+
+        :host([hidden]) {
+          display: none !important;
+        }
+
+        /* Theme variations */
+        :host([theme~='margin']) {
+          margin: 1em;
+        }
+
+        :host([theme~='padding']) {
+          padding: 1em;
+        }
+
+        :host([theme~='spacing']) {
+          gap: 1em;
+        }
+      </style>
+
+      <slot></slot>
+    `}static get is(){return"vaadin-vertical-layout"}}customElements.define(VerticalLayout.is,VerticalLayout);registerStyles$1("vaadin-progress-bar",css$e`
     :host {
       height: calc(var(--lumo-size-l) / 10);
       margin: var(--lumo-space-s) 0;

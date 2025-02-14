@@ -9,10 +9,14 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 public class EmpLeaveDTO {
+    private Long Id;
     private String employeeName;
     private String employeeLastname;
     private String leaveReason;
     private String leaveApprover;
     private LocalDate leaveStart;
     private LocalDate leaveEnd;
+    private String tckn;
+
+
 }

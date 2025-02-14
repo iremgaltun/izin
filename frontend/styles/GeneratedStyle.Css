@@ -138,3 +138,25 @@ vaadin-date-picker[theme~="helper-above-field"]::part(helper-text) {
     margin: 0;
     font-size: 1.5em;
 }
+.leave-progress-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.leave-status-label {
+    font-weight: bold;
+    left: 100%;
+    margin-bottom: 4px;
+}
+.leave-grid .vaadin-button {
+    font-size: 0.8em;  /* Font boyutunu küçült */
+    opacity: 0.6;      /* Şeffaflık ekle */
+    background-color: transparent;  /* Arka plan rengini kaldır */
+    border: none;      /* Kenarlık yok */
+}
+
+.leave-grid .vaadin-button:hover {
+    opacity: 1;        /* Hover durumunda şeffaflık kaldır */
+}
