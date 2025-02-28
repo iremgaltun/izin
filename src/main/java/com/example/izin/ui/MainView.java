@@ -22,6 +22,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -36,8 +37,10 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @PageTitle("Employee Management")
 @Route(value = "")
@@ -122,7 +125,7 @@ public class MainView extends AppLayout {
             File photoFile = new File("src/main/resources/static/images/profile-photos/" + employee.getTckn() + ".jpg");
 
             Avatar avatar = new Avatar(employee.getName());
-            //avatar.setName("avatar");// İsim göstergesi (isteğe bağlı)
+            avatar.setName("avatar");// İsim göstergesi (isteğe bağlı)
 
             if (photoFile.exists()) {
                 avatar.setImage(imageUrl);
@@ -130,10 +133,7 @@ public class MainView extends AppLayout {
                 avatar.setAbbreviation(employee.getName().substring(0, 2).toUpperCase()); // Yedek olarak baş harfler
             }
 
-            avatar.getStyle()
-                    .set("width", "40px")
-                    .set("height", "40px")
-                    .set("border", "1px solid #ccc");
+
 
             return avatar;
         })).setHeader("Fotoğraf").setAutoWidth(true);
@@ -167,7 +167,6 @@ public class MainView extends AppLayout {
             Employee employee = event.getItem();
             if (employee != null && employee.getId() > 0) {
                 getUI().ifPresent(ui -> {
-                    // EmpID'yi kullanarak izin detaylarına yönlendirme
                     ui.navigate(String.format("employee/%d", employee.getId()));
                 });
             } else {
@@ -187,9 +186,9 @@ public class MainView extends AppLayout {
         });
         deleteButton.addClickListener(event -> deleteEmployee());
     }
-
     private void showEmployeeForm(Employee employee) {
         boolean isUpdate = employee != null; // Güncelleme mi yoksa yeni ekleme mi kontrolü
+        Employee currentEmployee = isUpdate ? employee : new Employee(); // Mevcut veya yeni çalışan nesnesi
 
         Dialog dialog = new Dialog();
         dialog.addClassName("custom-dialog");
@@ -198,28 +197,43 @@ public class MainView extends AppLayout {
         title.addClassName("dialog-title");
         dialog.add(title);
 
-        TextField tcknField = new TextField("Kimlik Numarası", isUpdate ? employee.getTckn() : "");
-        TextField nameField = new TextField("Ad", isUpdate ? employee.getName() : "");
-        TextField lastnameField = new TextField("Soyad", isUpdate ? employee.getLastname() : "");
-        TextField PositionField = new TextField("Pozisyon", isUpdate ? employee.getPosition() : "");
-        TextField phoneField = new TextField("Telefon Numarası", isUpdate ? employee.getPhoneNumber() : "");
-        DatePicker birthDateField = new DatePicker("Doğum Tarihi", isUpdate ? employee.getBirthDate() : null);
-        birthDateField.addClassName("custom-date-picker");
-        DatePicker hireDateField = new DatePicker("İşe Alım Tarihi", isUpdate ? employee.getDateOfEmployment() : null);
-        hireDateField.addClassName("custom-date-picker");
+        // Form bileşenleri
+        TextField tcknField = new TextField("Kimlik Numarası");
+        TextField nameField = new TextField("Ad");
+        TextField lastnameField = new TextField("Soyad");
+        TextField positionField = new TextField("Pozisyon");
+        TextField phoneField = new TextField("Telefon Numarası");
+        DatePicker birthDateField = new DatePicker("Doğum Tarihi");
+        DatePicker hireDateField = new DatePicker("İşe Alım Tarihi");
 
-        tcknField.setWidth("100%");
-        nameField.setWidth("100%");
-        lastnameField.setWidth("100%");
-        PositionField.setWidth("100%");
-        phoneField.setWidth("100%");
-        birthDateField.setWidth("100%");
-        hireDateField.setWidth("100%");
+        tcknField.setWidthFull();
+        nameField.setWidthFull();
+        lastnameField.setWidthFull();
+        positionField.setWidthFull();
+        phoneField.setWidthFull();
+        birthDateField.setWidthFull();
+        hireDateField.setWidthFull();
 
+        // Binder ile formu bağlama
+        Binder<Employee> binder = new Binder<>(Employee.class);
+        binder.bind(tcknField, Employee::getTckn, Employee::setTckn);
+        binder.bind(nameField, Employee::getName, Employee::setName);
+        binder.bind(lastnameField, Employee::getLastname, Employee::setLastname);
+        binder.bind(positionField, Employee::getPosition, Employee::setPosition);
+        binder.bind(phoneField, Employee::getPhoneNumber, Employee::setPhoneNumber);
+        binder.bind(birthDateField, Employee::getBirthDate, Employee::setBirthDate);
+        binder.bind(hireDateField, Employee::getDateOfEmployment, Employee::setDateOfEmployment);
+
+        // Eğer güncelleme yapılıyorsa, formu mevcut verilerle doldur
+        if (isUpdate) {
+            binder.readBean(employee);
+        }
+
+        // Fotoğraf yükleme bileşeni
         MemoryBuffer buffer = new MemoryBuffer();
         Upload upload = new Upload(buffer);
         upload.setAcceptedFileTypes("image/jpeg", "image/png", "image/gif");
-        upload.setMaxFileSize(5 * 1024 * 1024); // 5 MB sınırı
+        upload.setMaxFileSize(10 * 1024 * 1024); // 10 MB sınırı
 
         Span uploadInfo = new Span("Fotoğraf yüklemek için dosya seçin.");
         uploadInfo.setVisible(true);
@@ -235,41 +249,60 @@ public class MainView extends AppLayout {
 
         Button saveButton = new Button("Kaydet", event -> {
             try {
+                binder.writeBean(currentEmployee); // Formdaki verileri Employee nesnesine yaz
+
+                // Eğer yeni ekleme yapılıyorsa ve TCKN boşsa hata ver
                 if (!isUpdate && (tcknField.getValue() == null || tcknField.getValue().isBlank())) {
                     Notification.show("Lütfen geçerli bir Kimlik Numarası girin!", 3000, Notification.Position.MIDDLE);
                     return;
                 }
 
-                Employee currentEmployee = isUpdate ? employee : new Employee();
-                currentEmployee.setTckn(tcknField.getValue());
-                currentEmployee.setName(nameField.getValue());
-                currentEmployee.setLastname(lastnameField.getValue());
-                currentEmployee.setPosition(PositionField.getValue());
-                currentEmployee.setPhoneNumber(phoneField.getValue());
-                currentEmployee.setBirthDate(birthDateField.getValue() != null ? birthDateField.getValue() : LocalDate.now().minusYears(25));
-                currentEmployee.setDateOfEmployment(hireDateField.getValue() != null ? hireDateField.getValue() : LocalDate.now());
+                // TCKN benzersizliği kontrolü
+                Optional<Employee> existingEmployee = employeeService.findByTckn(currentEmployee.getTckn());
+                if (existingEmployee.isPresent() && !existingEmployee.get().getId().equals(currentEmployee.getId())) {
+                    Notification.show("Bu TCKN zaten başka bir çalışan tarafından kullanılıyor.", 3000, Notification.Position.MIDDLE);
+                    return;
+                }
 
+                // Çalışanı kaydet/güncelle
                 if (isUpdate) {
                     employeeService.update(currentEmployee);
                 } else {
                     employeeService.add(currentEmployee);
                 }
 
-                // Fotoğrafı kaydetme
+                // Fotoğrafı kaydetme işlemi
                 if (photoStream.get() != null) {
                     Path uploadDir = Paths.get("src/main/resources/static/images/profile-photos");
                     if (!Files.exists(uploadDir)) {
                         Files.createDirectories(uploadDir);
                     }
 
-                    String fileName = currentEmployee.getTckn() + photoName.get().substring(photoName.get().lastIndexOf("."));
+                    // Kullanıcının mevcut fotoğrafı varsa uzantıyı koru
+                    String existingPhotoExtension = "";
+                    try (Stream<Path> files = Files.list(uploadDir)) {
+                        Optional<Path> existingPhoto = files
+                                .filter(path -> path.getFileName().toString().startsWith(currentEmployee.getTckn()))
+                                .findFirst();
+                        if (existingPhoto.isPresent()) {
+                            existingPhotoExtension = existingPhoto.get().toString().substring(existingPhoto.get().toString().lastIndexOf("."));
+                        }
+                    }
+
+                    // Yeni yüklenen fotoğrafın uzantısını al
+                    String newPhotoExtension = photoName.get().substring(photoName.get().lastIndexOf("."));
+
+                    // Eğer çalışan için zaten bir fotoğraf varsa, eski uzantıyı koru
+                    String fileExtension = existingPhotoExtension.isEmpty() ? newPhotoExtension : existingPhotoExtension;
+                    String fileName = currentEmployee.getTckn() + fileExtension;
                     Path filePath = uploadDir.resolve(fileName);
 
                     try (InputStream inputStream = photoStream.get()) {
                         Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-                        Notification.show("Fotoğraf başarıyla kaydedildi.", 3000, Notification.Position.MIDDLE);
+                        Notification.show("Fotoğraf başarıyla güncellendi.", 3000, Notification.Position.MIDDLE);
                     }
                 }
+
 
                 Notification.show(isUpdate ? "Çalışan başarıyla güncellendi!" : "Çalışan başarıyla eklendi!");
                 updateGrid();
@@ -283,12 +316,11 @@ public class MainView extends AppLayout {
 
         HorizontalLayout dialogButtons = new HorizontalLayout(saveButton, cancelButton);
         VerticalLayout dialogLayout = new VerticalLayout(
-                tcknField, nameField, lastnameField,PositionField, phoneField, birthDateField, hireDateField, upload, uploadInfo, dialogButtons
+                tcknField, nameField, lastnameField, positionField, phoneField, birthDateField, hireDateField, upload, uploadInfo, dialogButtons
         );
 
         dialogLayout.setWidthFull();
         dialog.add(dialogLayout);
-
         dialog.setWidth("60%");
         dialog.open();
     }

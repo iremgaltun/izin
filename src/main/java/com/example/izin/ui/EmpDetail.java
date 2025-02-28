@@ -158,7 +158,7 @@ public class EmpDetail extends AppLayout implements BeforeEnterObserver {
             leaveGrid.addColumn(Leave::getLeaveEnd).setHeader("İzin Bitiş Tarihi").setAutoWidth(true);
 
             // Yeni sütun: Toplam izin gününü hesapla
-            leaveGrid.addColumn(leave -> ChronoUnit.DAYS.between(leave.getLeaveStart(), leave.getLeaveEnd())+1)
+            leaveGrid.addColumn(leave -> ChronoUnit.DAYS.between(leave.getLeaveStart(), leave.getLeaveEnd()))
                     .setHeader("Toplam Gün")
                     .setAutoWidth(true);
             leaveGrid.addComponentColumn(leave -> {
@@ -315,14 +315,8 @@ public class EmpDetail extends AppLayout implements BeforeEnterObserver {
         layout.addClassName("employee-info-layout");
 
         Avatar avatar = new Avatar(employee.getName() + " " + employee.getLastname());
-        avatar.setName("custom-avatar");
-        avatar.getStyle()
-                .set("width", "150px")
-                .set("height", "150px")
-                .set("border-radius", "50%")
-                .set("object-fit", "cover")
-                .set("margin-left", "8px")
-                .set("margin-right", "16px");
+        avatar.setClassName("custom-avatar");
+
 
         String imageUrl = "/images/profile-photos/" + employee.getTckn() + ".jpg";
         Path imagePath = Paths.get("src/main/resources/static/images/profile-photos/" + employee.getTckn() + ".jpg");
@@ -366,7 +360,6 @@ public class EmpDetail extends AppLayout implements BeforeEnterObserver {
         return employeeInfo;
     }
     private void openEditDialog(Employee employee) {
-        // Öncelikle employee null olamaz, bu yüzden sadece güncelleme işlemi yapılacak.
         if (employee == null) {
             Notification.show("Güncellenecek çalışan seçilmedi.", 3000, Notification.Position.MIDDLE);
             return;
@@ -379,23 +372,20 @@ public class EmpDetail extends AppLayout implements BeforeEnterObserver {
         title.addClassName("dialog-title");
         dialog.add(title);
 
-        // Mevcut çalışan bilgilerini al
-        Employee currentEmployee = employee;
+        // Form bileşenleri
+        TextField nameField = new TextField("Ad");
+        TextField lastnameField = new TextField("Soyad");
+        TextField tcknField = new TextField("Kimlik Numarası");
+        TextField phoneField = new TextField("Telefon Numarası");
+        DatePicker birthDateField = new DatePicker("Doğum Tarihi");
+        DatePicker hireDateField = new DatePicker("İşe Alım Tarihi");
 
-        // Form alanları
-        TextField nameField = new TextField("Ad", currentEmployee.getName() != null ? currentEmployee.getName() : "");
-        TextField lastnameField = new TextField("Soyad", currentEmployee.getLastname() != null ? currentEmployee.getLastname() : "");
-        TextField tcknField = new TextField("Kimlik Numarası", currentEmployee.getTckn() != null ? currentEmployee.getTckn() : "");
-        TextField phoneField = new TextField("Telefon Numarası", currentEmployee.getPhoneNumber() != null ? currentEmployee.getPhoneNumber() : "");
-        DatePicker birthDateField = new DatePicker("Doğum Tarihi", currentEmployee.getBirthDate());
-        DatePicker hireDateField = new DatePicker("İşe Alım Tarihi", currentEmployee.getDateOfEmployment());
-
-        nameField.setWidth("100%");
-        lastnameField.setWidth("100%");
-        tcknField.setWidth("100%");
-        phoneField.setWidth("100%");
-        birthDateField.setWidth("100%");
-        hireDateField.setWidth("100%");
+        nameField.setWidthFull();
+        lastnameField.setWidthFull();
+        tcknField.setWidthFull();
+        phoneField.setWidthFull();
+        birthDateField.setWidthFull();
+        hireDateField.setWidthFull();
 
         // Fotoğraf yükleme bileşeni
         MemoryBuffer buffer = new MemoryBuffer();
@@ -404,7 +394,6 @@ public class EmpDetail extends AppLayout implements BeforeEnterObserver {
         upload.setMaxFileSize(5 * 1024 * 1024);
 
         Span uploadInfo = new Span("Fotoğraf yüklemek için dosya seçin.");
-        uploadInfo.setVisible(true);
 
         AtomicReference<InputStream> photoStream = new AtomicReference<>();
         AtomicReference<String> photoName = new AtomicReference<>();
@@ -415,31 +404,31 @@ public class EmpDetail extends AppLayout implements BeforeEnterObserver {
             photoName.set(event.getFileName());
         });
 
-        // Form doğrulama
+        // Binder ile formu bağlama
         Binder<Employee> binder = new Binder<>(Employee.class);
+        binder.bind(nameField, Employee::getName, Employee::setName);
+        binder.bind(lastnameField, Employee::getLastname, Employee::setLastname);
+        binder.bind(tcknField, Employee::getTckn, Employee::setTckn);
+        binder.bind(phoneField, Employee::getPhoneNumber, Employee::setPhoneNumber);
+        binder.bind(birthDateField, Employee::getBirthDate, Employee::setBirthDate);
+        binder.bind(hireDateField, Employee::getDateOfEmployment, Employee::setDateOfEmployment);
+
+        // Mevcut çalışan bilgilerini forma aktar
+        binder.readBean(employee);
 
         Button saveButton = new Button("Güncelle", event -> {
             try {
-                // TCKN format kontrolü
-                String tcknValue = tcknField.getValue();
+                binder.writeBean(employee);
 
-
-                currentEmployee.setName(nameField.getValue());
-                currentEmployee.setLastname(lastnameField.getValue());
-                currentEmployee.setTckn(tcknValue);
-                currentEmployee.setPhoneNumber(phoneField.getValue());
-                currentEmployee.setBirthDate(birthDateField.getValue());
-                currentEmployee.setDateOfEmployment(hireDateField.getValue());
-
-                // TCKN benzersizliği kontrolü
-                Optional<Employee> existingEmployee = employeeService.findByTckn(currentEmployee.getTckn());
-                if (existingEmployee.isPresent() && !existingEmployee.get().getId().equals(currentEmployee.getId())) {
+                // TCKN kontrolü
+                Optional<Employee> existingEmployee = employeeService.findByTckn(employee.getTckn());
+                if (existingEmployee.isPresent() && !existingEmployee.get().getId().equals(employee.getId())) {
                     Notification.show("Bu TCKN zaten başka bir çalışan tarafından kullanılıyor.", 3000, Notification.Position.MIDDLE);
                     return;
                 }
 
-                // Çalışanı güncelle
-                employeeService.update(currentEmployee);
+                // Güncelleme işlemi
+                employeeService.update(employee);
                 Notification.show("Çalışan başarıyla güncellendi!", 3000, Notification.Position.MIDDLE);
 
                 // Fotoğraf yükleme işlemi
@@ -450,7 +439,7 @@ public class EmpDetail extends AppLayout implements BeforeEnterObserver {
                     }
 
                     String fileExtension = photoName.get().substring(photoName.get().lastIndexOf("."));
-                    String fileName = currentEmployee.getTckn() + fileExtension;
+                    String fileName = employee.getTckn() + fileExtension;
                     Path filePath = uploadDir.resolve(fileName);
 
                     try (InputStream inputStream = photoStream.get()) {
@@ -478,6 +467,7 @@ public class EmpDetail extends AppLayout implements BeforeEnterObserver {
         dialog.setWidth("60%");
         dialog.open();
     }
+
 
 
 

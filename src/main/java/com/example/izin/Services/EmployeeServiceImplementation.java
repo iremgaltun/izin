@@ -35,7 +35,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
     }
 
     @Override
-    @Transactional
+
     public Employee add(Employee employee) {
         employeeRepository.findByTckn(employee.getTckn()).ifPresent(existing -> {
             throw new IllegalArgumentException("An employee with this TCKN already exists: " + employee.getTckn());
@@ -53,19 +53,20 @@ public class EmployeeServiceImplementation implements EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    @Transactional
-    public Employee update(Employee employee) {
-        System.out.println("Güncellenmek istenen çalışan ID: " + employee.getId());  // Debug için log ekleyelim
 
+    @Override
+    public Employee update(Employee employee) {
         if (employee.getId() == null) {
             throw new RuntimeException("Çalışan ID null olamaz!");
         }
 
-        Employee existingEmployee = entityManager.find(Employee.class, employee.getId());
+        Optional<Employee> existingEmployeeOpt = employeeRepository.findById(employee.getId());
 
-        if (existingEmployee == null) {
+        if (existingEmployeeOpt.isEmpty()) {
             throw new RuntimeException("Employee not found with id: " + employee.getId());
         }
+
+        Employee existingEmployee = existingEmployeeOpt.get();
 
         existingEmployee.setName(employee.getName());
         existingEmployee.setLastname(employee.getLastname());
@@ -75,7 +76,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
         existingEmployee.setPhoneNumber(employee.getPhoneNumber());
         existingEmployee.setPosition(employee.getPosition());
 
-        return entityManager.merge(existingEmployee);
+        return employeeRepository.save(existingEmployee);
     }
 
 

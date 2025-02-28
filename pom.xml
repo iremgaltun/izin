@@ -55,6 +55,7 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.6.0</version>  <!-- En güncel sürümü kullanabilirsiniz -->
 		</dependency>
+
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
